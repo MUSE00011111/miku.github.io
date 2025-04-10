@@ -31,17 +31,26 @@ function selectAnswer(questionId, answer) {
     userAnswers[questionId] = answer;
 }
 
-fetch('questions.json')
-    .then(response => response.json())
-    .then(questions => {
-        if (questions.length < 10) throw new Error('题目数量不足10题');
-        currentQuestions = shuffleArray(questions).slice(0, 10);
-        renderQuiz(currentQuestions);
-    })
-    .catch(error => {
-        alert(`题目加载失败：${error.message}`);
-        console.error(error);
-    });
+// 切换到答题界面
+document.getElementById('nextBtn').addEventListener('click', () => {
+    const userInfoContainer = document.querySelector('.user-info-container');
+    const quizResultContainer = document.querySelector('.quiz-result-container');
+    userInfoContainer.style.transform = 'translateX(-100%)';
+    quizResultContainer.style.transform = 'translateX(0)';
+    
+    // 加载题目
+    fetch('questions.json')
+        .then(response => response.json())
+        .then(questions => {
+            if (questions.length < 10) throw new Error('题目数量不足10题');
+            currentQuestions = shuffleArray(questions).slice(0, 10);
+            renderQuiz(currentQuestions);
+        })
+        .catch(error => {
+            alert(`题目加载失败：${error.message}`);
+            console.error(error);
+        });
+});
 
 function submitQuiz() {
     const college = document.getElementById('college').value;
@@ -50,7 +59,9 @@ function submitQuiz() {
 
     let correctCount = 0;
     currentQuestions.forEach(q => {
-        if (userAnswers[q.id] === q.correct) correctCount++;
+        if (userAnswers[q.id] && userAnswers[q.id] === q.correct) { // 增加userAnswers[q.id]存在性判断
+            correctCount++;
+        }
     });
     const score = correctCount * 10;
 
