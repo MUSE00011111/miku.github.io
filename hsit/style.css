@@ -11,8 +11,7 @@
     position: sticky;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(18px);
+    background: #007bff;
     padding: 18px 20px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
     z-index: 1000;
@@ -24,24 +23,18 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .logo {
     height: 60px;
     width: auto;
     object-fit: cover;
-    border-radius: 10px;
-    transition: transform 0.2s ease;
-}
-
-.logo:hover {
-    transform: scale(1.05);
 }
 
 .header-title {
     font-size: 1.8em;
-    color: #005f9f;
+    color: white;
     font-weight: 600;
 }
 
@@ -56,22 +49,45 @@
     padding: 40px 20px;
     transition: transform 0.5s cubic-bezier(0.77, 0, 0.18, 1); /* 阻尼感过渡 */
     z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.user-info-container label {
+.college-select {
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.college-select select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.1em;
+}
+
+.info-box {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.info-box label {
     display: block;
     margin: 15px 0;
     font-size: 1.2em;
     color: #333;
 }
 
-.user-info-container select,
-.user-info-container input {
+.info-box input {
     padding: 10px 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
     width: 100%;
-    max-width: 320px;
     font-size: 1.1em;
 }
 
@@ -93,6 +109,28 @@
     width: 100%;
     min-height: 100vh;
     padding: 80px 20px 20px;
+}
+
+/* 题目样式 */
+.question {
+    margin: 30px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.question p {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.question label {
+    display: block;
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #666;
 }
 
 /* 结果页样式 */
