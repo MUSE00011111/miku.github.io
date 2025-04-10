@@ -1,49 +1,91 @@
-/* 顶栏样式（保持之前的全屏覆盖） */
+/* 全局样式 */
+body {
+    margin: 0;
+    font-family: "微软雅黑", sans-serif;
+}
+
+/* 顶栏样式（全屏覆盖+高斯模糊） */
 .header {
     position: sticky;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.8);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     padding: 15px 0;
-    margin: 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
 
-/* 结果容器样式 */
-.result-container {
+.logo-container {
+    max-width: 1200px; /* 内容最大宽度（可选） */
+    margin: 0 auto; /* 内容居中 */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 内容居中，如需居左改flex-start */
+    padding: 0 20px; /* 防止小屏幕内容贴边 */
+}
+
+.logo {
+    height: 60px; /* 固定logo高度 */
+    max-width: 100%; /* 防止宽度溢出 */
+    object-fit: contain; /* 保持比例，不拉伸 */
+    margin-right: 15px;
+    border-radius: 8px; /* 圆角（可选） */
+}
+
+.header-title {
+    color: #005f9f;
+    margin: 0;
+    font-size: 1.5em;
+}
+
+/* 内容容器 */
+.container {
+    margin-top: 90px; /* 顶栏高度60px+padding30px=90px */
+    padding: 0 20px;
+    min-height: 80vh; /* 确保内容区高度 */
+}
+
+/* 题目样式 */
+.question {
+    margin-bottom: 30px;
+}
+
+.options label {
+    display: block;
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+/* 结果页样式 */
+#resultContainer {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    background: #fff;
+    background-color: white;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 30px;
-    animation: fadeIn 0.5s ease;
 }
 
 .score {
-    font-size: 32px;
+    font-size: 2.2em;
     color: #2c3e50;
 }
 
 #qrcode {
-    border: 2px solid #bdc3c7;
-    border-radius: 8px;
-    padding: 10px;
+    border: 2px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .student-info {
-    font-size: 18px;
-    color: #7f8c8d;
-}
-
-/* 动画效果 */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    font-size: 1.2em;
+    color: #666;
 }
