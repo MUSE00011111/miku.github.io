@@ -1,91 +1,165 @@
 /* 全局样式 */
-body {
+* {
     margin: 0;
-    font-family: "微软雅黑", sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", sans-serif;
+    list-style: none;
+    text-decoration: none;
 }
 
-/* 顶栏样式（全屏覆盖+高斯模糊） */
+/* 顶栏样式（高斯模糊+粘性定位） */
 .header {
     position: sticky;
     top: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    padding: 15px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(18px);
+    padding: 18px 20px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
 
 .logo-container {
-    max-width: 1200px; /* 内容最大宽度（可选） */
-    margin: 0 auto; /* 内容居中 */
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: center; /* 内容居中，如需居左改flex-start */
-    padding: 0 20px; /* 防止小屏幕内容贴边 */
+    justify-content: center;
+    gap: 20px;
 }
 
 .logo {
-    height: 60px; /* 固定logo高度 */
-    max-width: 100%; /* 防止宽度溢出 */
-    object-fit: contain; /* 保持比例，不拉伸 */
-    margin-right: 15px;
-    border-radius: 8px; /* 圆角（可选） */
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
 }
 
 .header-title {
+    font-size: 1.8em;
     color: #005f9f;
-    margin: 0;
-    font-size: 1.5em;
+    font-weight: 600;
 }
 
-/* 内容容器 */
+/* 答题页容器 */
 .container {
-    margin-top: 90px; /* 顶栏高度60px+padding30px=90px */
-    padding: 0 20px;
-    min-height: 80vh; /* 确保内容区高度 */
+    max-width: 1000px;
+    margin: 80px auto 0;
+    padding: 0 30px;
+    min-height: 80vh;
 }
 
-/* 题目样式 */
+/* 题目卡片样式 */
 .question {
-    margin-bottom: 30px;
+    margin: 40px 0;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
 }
 
-.options label {
-    display: block;
-    margin: 10px 0;
+.question:hover {
+    transform: scale(1.03);
+}
+
+.options {
+    margin-top: 25px;
     font-size: 1.1em;
     color: #333;
 }
 
-/* 结果页样式 */
-#resultContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
+.options label {
+    display: block;
+    margin: 15px 0;
+    padding: 12px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.options label:hover {
+    background-color: #e8f5ff;
+    transform: translateX(8px);
+}
+
+/* 提交按钮 */
+#submitBtn {
     width: 100%;
-    height: 100vh;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
+    padding: 16px 40px;
+    font-size: 1.2em;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#submitBtn:hover {
+    transform: scale(1.04);
+    box-shadow: 0 12px 36px rgba(0, 123, 255, 0.3);
+}
+
+/* 结果页样式 */
+.result-content {
+    text-align: center;
+    padding: 100px 20px;
+    min-height: 100vh;
+    background: #f0f8ff;
 }
 
 .score {
-    font-size: 2.2em;
-    color: #2c3e50;
-}
-
-#qrcode {
-    border: 2px solid #e0e0e0;
-    padding: 20px;
-    border-radius: 10px;
+    font-size: 4em;
+    color: #007bff;
+    margin-bottom: 30px;
+    text-shadow: 0 4px 16px rgba(0, 123, 255, 0.15);
 }
 
 .student-info {
-    font-size: 1.2em;
+    font-size: 1.5em;
     color: #666;
+    margin-bottom: 50px;
+    line-height: 1.8;
+}
+
+#qrcode {
+    display: inline-block;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn {
+    margin-top: 60px;
+    padding: 14px 40px;
+    font-size: 1.2em;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 28px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.back-btn:hover {
+    transform: scale(1.03);
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container, .result-content {
+    animation: fadeIn 0.6s ease-out forwards;
 }
