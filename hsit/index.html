@@ -1,26 +1,29 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>415国家安全日答题</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- 新增顶栏（带高斯模糊效果） -->
-    <header class="header">
-        <div class="logo-container">
-            <img src="学院logo.png" alt="学院logo" class="logo">
-            <h1 class="header-title">415国家安全日趣味答题</h1>
-        </div>
-    </header>
-
-    <div class="container">
-        <div id="quizContainer"></div>
-        <button id="submitBtn" onclick="submitQuiz()">提交答案</button>
-        <div id="resultContainer"></div>
+<header class="header">
+    <div class="logo-container">
+        <img src="学院logo.png" alt="学院logo" class="logo">
+        <h1 class="header-title">415国家安全日趣味答题</h1>
     </div>
+</header>
 
-    <script src="script.js"></script>
-</body>
-</html>
+<!-- 答题容器（答题时显示） -->
+<div class="quiz-container">
+    <!-- 题目、选项等答题内容 -->
+    <div class="question">
+        <p>1. 国家安全体系包括哪些方面？</p>
+        <div class="options">
+            <label><input type="radio" name="q1" value="1"> 政治安全</label>
+            <label><input type="radio" name="q1" value="2"> 经济安全</label>
+            <label><input type="radio" name="q1" value="3"> 社会安全</label>
+            <label><input type="radio" name="q1" value="4"> 以上都是</label>
+        </div>
+    </div>
+    
+    <button id="submit-btn">提交答案</button>
+</div>
+
+<!-- 结果容器（答题完毕后显示） -->
+<div class="result-container" style="display: none;">
+    <h2 class="score">您的分数：<span id="score-value">0</span>/100</h2>
+    <div id="qrcode"></div> <!-- 二维码容器 -->
+    <p class="student-info">学生姓名：张三 | 学号：2025001</p>
+</div>
