@@ -18,16 +18,19 @@
 
     <!-- 用户信息登记容器 -->
     <div class="user-info-container">
-        <label for="college">学院：</label>
-        <select id="college">
-            <option value="计算机科学与技术学院" selected>计算机科学与技术学院</option>
-            <option value="艺术与传媒学院">艺术与传媒学院</option>
-            <option value="商学院">商学院</option>
-        </select>
-        <label for="name">姓名：</label>
-        <input type="text" id="name" required placeholder="请输入姓名">
-        <label for="studentId">学号：</label>
-        <input type="text" id="studentId" required placeholder="请输入学号">
+        <div class="college-select">
+            <select id="college">
+                <option value="计算机科学与技术学院" selected>计算机科学与技术学院</option>
+                <option value="艺术与传媒学院">艺术与传媒学院</option>
+                <option value="商学院">商学院</option>
+            </select>
+        </div>
+        <div class="info-box">
+            <label for="name">姓名：</label>
+            <input type="text" id="name" required placeholder="请输入姓名">
+            <label for="studentId">学号：</label>
+            <input type="text" id="studentId" required placeholder="请输入学号">
+        </div>
         <button id="nextBtn">进入答题</button>
     </div>
 
