@@ -1,7 +1,6 @@
 let currentQuestions = [];
 let userAnswers = {};
 
-// 题目打乱算法
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -10,7 +9,6 @@ function shuffleArray(array) {
     return array;
 }
 
-// 渲染题目
 function renderQuiz(questions) {
     const quizContainer = document.getElementById('quizContainer');
     quizContainer.innerHTML = questions.map(question => `
@@ -29,12 +27,10 @@ function renderQuiz(questions) {
     `).join('');
 }
 
-// 记录答案
 function selectAnswer(questionId, answer) {
     userAnswers[questionId] = answer;
 }
 
-// 加载题目
 fetch('questions.json')
     .then(response => response.json())
     .then(questions => {
@@ -47,13 +43,12 @@ fetch('questions.json')
         console.error(error);
     });
 
-// 提交处理
 function submitQuiz() {
     let correctCount = 0;
     currentQuestions.forEach(q => {
+        console.log(`题目ID: ${q.id}, 用户答案: ${userAnswers[q.id]}, 正确答案: ${q.correct}`);
         if (userAnswers[q.id] === q.correct) correctCount++;
     });
     const score = correctCount * 10;
-    // 跳转结果页并传递分数
     window.location.href = `result.html?score=${score}`;
 }
