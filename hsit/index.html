@@ -16,12 +16,32 @@
         </div>
     </header>
 
-    <!-- 答题容器 -->
-    <div class="container">
-        <div id="quizContainer"></div>
-        <button id="submitBtn" onclick="submitQuiz()">立即提交</button>
+    <!-- 用户信息登记区域 -->
+    <div class="user-info-section">
+        <label for="college">学院：</label>
+        <select id="college">
+            <option value="计算机科学与技术学院" selected>计算机科学与技术学院</option>
+            <option value="艺术与传媒学院">艺术与传媒学院</option>
+            <option value="商学院">商学院</option>
+        </select>
+        <label for="name">姓名：</label>
+        <input type="text" id="name" required placeholder="请输入姓名">
+        <label for="studentId">学号：</label>
+        <input type="text" id="studentId" required placeholder="请输入学号">
     </div>
 
+    <!-- 答题与结果容器整合 -->
+    <div class="container">
+        <div id="quizContainer"></div>
+        <div id="resultContainer" style="display: none; text-align: center;">
+            <h2 class="score" id="scoreValue">0</h2>/100
+            <div id="studentInfo" class="student-info"></div>
+            <div id="qrcode"></div>
+            <button class="back-btn" onclick="resetQuiz()">重新答题</button>
+        </div>
+    </div>
+
+    <button id="submitBtn" onclick="submitQuiz()">立即提交</button>
     <script src="script.js"></script>
 </body>
 </html>
