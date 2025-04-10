@@ -3,197 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>国家安全答题</title>
-    <style>
-        /* 全局样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "PingFang SC", sans-serif;
-        }
-
-        /* 顶栏动画 & 高斯模糊 */
-        .header {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(15px);
-            padding: 15px 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease; /* 滚动时的微动画 */
-            z-index: 1000;
-        }
-
-        .header.scrolled {
-            transform: translateY(-5px); /* 滚动时轻微上浮 */
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            height: 60px;
-            max-width: 60px;
-            border-radius: 8px;
-            transition: transform 0.2s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .header-title {
-            font-size: 1.6em;
-            color: #007bff;
-            font-weight: 600;
-        }
-
-        /* 答题容器 & 动画 */
-        .container {
-            max-width: 1000px;
-            margin: 80px auto 0;
-            padding: 0 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease-out forwards; /* 入场动画 */
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .question {
-            margin-bottom: 40px;
-            padding: 24px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-            transition: transform 0.2s ease;
-        }
-
-        .question:hover {
-            transform: scale(1.02);
-        }
-
-        .options {
-            margin-top: 20px;
-            font-size: 1.1em;
-            color: #333;
-        }
-
-        .options label {
-            display: block;
-            margin: 12px 0;
-            cursor: pointer;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.2s ease;
-        }
-
-        .options label:hover {
-            background-color: #f5f8ff;
-        }
-
-        #submitBtn {
-            width: 100%;
-            padding: 14px 32px;
-            font-size: 1.2em;
-            color: white;
-            background-color: #007bff;
-            border: none;
-            border-radius: 24px;
-            box-shadow: 0 6px 18px rgba(0, 123, 255, 0.2);
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        #submitBtn:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 24px rgba(0, 123, 255, 0.3);
-        }
-    </style>
+    <title>国家安全知识答题</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
+    <!-- 顶栏（高斯模糊+固定定位） -->
     <header class="header">
         <div class="logo-container">
             <img src="学院logo.png" alt="学院logo" class="logo">
-            <h1 class="header-title">国家安全知识答题</h1>
+            <h1 class="header-title">415国家安全日答题</h1>
         </div>
     </header>
 
+    <!-- 答题容器 -->
     <div class="container">
         <div id="quizContainer"></div>
-        <button id="submitBtn" onclick="submitQuiz()">提交答案</button>
+        <button id="submitBtn" onclick="submitQuiz()">立即提交</button>
     </div>
 
-    <script>
-        let currentQuestions = [];
-        let userAnswers = {};
-
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
-        function renderQuiz(questions) {
-            const quizContainer = document.getElementById('quizContainer');
-            quizContainer.innerHTML = questions.map(question => `
-                <div class="question">
-                    <p>${question.question}</p>
-                    <div class="options">
-                        ${question.options.map(option => `
-                            <label>
-                                <input type="radio" name="q${question.id}" value="${option}" 
-                                       onclick="selectAnswer(${question.id}, '${option}')">
-                                ${option}
-                            </label>
-                        `).join('')}
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function selectAnswer(questionId, answer) {
-            userAnswers[questionId] = answer;
-        }
-
-        // 加载题目时添加滚动监听
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        fetch('questions.json')
-            .then(response => response.json())
-            .then(questions => {
-                currentQuestions = shuffleArray(questions).slice(0, 10);
-                renderQuiz(currentQuestions);
-            });
-
-        function submitQuiz() {
-            let correctCount = 0;
-            currentQuestions.forEach(q => {
-                if (userAnswers[q.id] === q.correct) correctCount++;
-            });
-            const score = correctCount * 10;
-            // 带动画的页面跳转
-            window.location.href = `result.html?score=${score}`;
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
