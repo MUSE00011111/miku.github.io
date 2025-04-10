@@ -44,11 +44,40 @@ fetch('questions.json')
     });
 
 function submitQuiz() {
+    const college = document.getElementById('college').value;
+    const name = document.getElementById('name').value;
+    const studentId = document.getElementById('studentId').value;
+
     let correctCount = 0;
     currentQuestions.forEach(q => {
-        console.log(`题目ID: ${q.id}, 用户答案: ${userAnswers[q.id]}, 正确答案: ${q.correct}`);
         if (userAnswers[q.id] === q.correct) correctCount++;
     });
     const score = correctCount * 10;
-    window.location.href = `result.html?score=${score}`;
+
+    document.getElementById('quizContainer').style.display = 'none';
+    document.getElementById('resultContainer').style.display = 'block';
+    document.getElementById('scoreValue').textContent = score;
+
+    // 显示用户信息
+    document.getElementById('studentInfo').innerHTML = `
+        学院：${college}<br>
+        姓名：${name}<br>
+        学号：${studentId}<br>
+        提交时间：${new Date().toLocaleString()}
+    `;
+
+    // 生成二维码
+    const qrContent = `【国家安全答题结果】\n学院：${college}\n姓名：${name}\n学号：${studentId}\n分数：${score}/100\n时间：${new Date().toLocaleString()}`;
+    new QRCode('qrcode', {
+        text: qrContent,
+        width: 250,
+        height: 250,
+        correctLevel: QRCode.CorrectLevel.H,
+        colorDark: '#007bff',
+        colorLight: '#ffffff'
+    });
+}
+
+function resetQuiz() {
+    location.reload();
 }
