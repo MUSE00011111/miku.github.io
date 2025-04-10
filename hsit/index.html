@@ -1,29 +1,35 @@
-<header class="header">
-    <div class="logo-container">
-        <img src="学院logo.png" alt="学院logo" class="logo">
-        <h1 class="header-title">415国家安全日趣味答题</h1>
-    </div>
-</header>
-
-<!-- 答题容器（答题时显示） -->
-<div class="quiz-container">
-    <!-- 题目、选项等答题内容 -->
-    <div class="question">
-        <p>1. 国家安全体系包括哪些方面？</p>
-        <div class="options">
-            <label><input type="radio" name="q1" value="1"> 政治安全</label>
-            <label><input type="radio" name="q1" value="2"> 经济安全</label>
-            <label><input type="radio" name="q1" value="3"> 社会安全</label>
-            <label><input type="radio" name="q1" value="4"> 以上都是</label>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>415国家安全日答题</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 二维码库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <!-- 顶栏（全屏高斯模糊） -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="学院logo.png" alt="学院logo" class="logo">
+            <h1 class="header-title">415国家安全日趣味答题</h1>
         </div>
-    </div>
-    
-    <button id="submit-btn">提交答案</button>
-</div>
+    </header>
 
-<!-- 结果容器（答题完毕后显示） -->
-<div class="result-container" style="display: none;">
-    <h2 class="score">您的分数：<span id="score-value">0</span>/100</h2>
-    <div id="qrcode"></div> <!-- 二维码容器 -->
-    <p class="student-info">学生姓名：张三 | 学号：2025001</p>
-</div>
+    <!-- 答题容器 -->
+    <div class="container">
+        <div id="quizContainer"></div>
+        <button id="submitBtn" onclick="submitQuiz()">提交答案</button>
+    </div>
+
+    <!-- 结果容器（答题后显示） -->
+    <div id="resultContainer" style="display: none;">
+        <h2 class="score">答题成绩：<span id="scoreValue">0</span>/100</h2>
+        <div id="qrcode"></div>
+        <p class="student-info">学生姓名：张三 | 学号：20250001</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
