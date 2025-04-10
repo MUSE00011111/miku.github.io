@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
-    <!-- 顶栏（高斯模糊+固定定位） -->
+    <!-- 顶栏 -->
     <header class="header">
         <div class="logo-container">
             <img src="学院logo.png" alt="学院logo" class="logo">
@@ -16,8 +16,8 @@
         </div>
     </header>
 
-    <!-- 用户信息登记区域 -->
-    <div class="user-info-section">
+    <!-- 用户信息登记容器 -->
+    <div class="user-info-container">
         <label for="college">学院：</label>
         <select id="college">
             <option value="计算机科学与技术学院" selected>计算机科学与技术学院</option>
@@ -28,11 +28,12 @@
         <input type="text" id="name" required placeholder="请输入姓名">
         <label for="studentId">学号：</label>
         <input type="text" id="studentId" required placeholder="请输入学号">
+        <button id="nextBtn">进入答题</button>
     </div>
 
-    <!-- 答题与结果容器整合 -->
-    <div class="container">
-        <div id="quizContainer"></div>
+    <!-- 答题与结果容器 -->
+    <div class="quiz-result-container">
+        <div class="container" id="quizContainer"></div>
         <div id="resultContainer" style="display: none; text-align: center;">
             <h2 class="score" id="scoreValue">0</h2>/100
             <div id="studentInfo" class="student-info"></div>
@@ -41,7 +42,6 @@
         </div>
     </div>
 
-    <button id="submitBtn" onclick="submitQuiz()">立即提交</button>
     <script src="script.js"></script>
 </body>
 </html>
