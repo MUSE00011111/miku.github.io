@@ -4,8 +4,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Microsoft YaHei", sans-serif;
-    list-style: none;
-    text-decoration: none;
 }
 
 /* 顶栏样式（高斯模糊+粘性定位） */
@@ -25,13 +23,13 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 20px;
+    justify-content: flex-start;
 }
 
 .logo {
     height: 60px;
-    width: 60px;
+    width: auto;
     object-fit: cover;
     border-radius: 10px;
     transition: transform 0.2s ease;
@@ -47,12 +45,37 @@
     font-weight: 600;
 }
 
-/* 答题页容器 */
+/* 用户信息区域样式 */
+.user-info-section {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f0f8ff;
+    border-radius: 10px;
+}
+
+.user-info-section label {
+    display: block;
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.user-info-section select,
+.user-info-section input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 240px;
+    font-size: 1em;
+}
+
+/* 答题容器 */
 .container {
     max-width: 1000px;
-    margin: 80px auto 0;
+    margin: 20px auto 0;
     padding: 0 30px;
-    min-height: 80vh;
+    min-height: 60vh;
 }
 
 /* 题目卡片样式 */
@@ -89,32 +112,6 @@
     transform: translateX(8px);
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    justify-content: flex-start; /* logo居左 */
-}
-@supports (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px)) {
-    .header {
-        background: rgba(255, 255, 255, 0.92);
-        backdrop-filter: blur(18px);
-    }
-}
-@media (min-width: 768px) { /* 电脑端适配 */
-    .logo {
-        max-width: 150px; /* 电脑端显示更长logo */
-        height: auto;
-        margin-right: 20px;
-    }
-    .header-title {
-        font-size: 2em; /* 适配logo大小调整标题字体 */
-    }
-}
-
-
 /* 提交按钮 */
 #submitBtn {
     width: 100%;
@@ -135,57 +132,41 @@
 }
 
 /* 结果页样式 */
-.result-content {
-    text-align: center;
-    padding: 100px 20px;
-    min-height: 100vh;
-    background: #f0f8ff;
+#resultContainer {
+    margin-top: 40px;
 }
 
 .score {
-    font-size: 4em;
+    font-size: 3em;
     color: #007bff;
-    margin-bottom: 30px;
-    text-shadow: 0 4px 16px rgba(0, 123, 255, 0.15);
+    margin-bottom: 20px;
 }
 
 .student-info {
-    font-size: 1.5em;
+    font-size: 1.3em;
     color: #666;
-    margin-bottom: 50px;
-    line-height: 1.8;
+    margin-bottom: 30px;
 }
 
 #qrcode {
     display: inline-block;
-    padding: 30px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
 .back-btn {
-    margin-top: 60px;
-    padding: 14px 40px;
-    font-size: 1.2em;
+    padding: 10px 24px;
+    font-size: 1.1em;
     color: white;
     background-color: #007bff;
     border: none;
-    border-radius: 28px;
+    border-radius: 20px;
     cursor: pointer;
     transition: transform 0.2s ease;
 }
 
 .back-btn:hover {
     transform: scale(1.03);
-}
-
-/* 动画效果 */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.container, .result-content {
-    animation: fadeIn 0.6s ease-out forwards;
 }
