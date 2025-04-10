@@ -1,47 +1,49 @@
-/* 顶栏高斯模糊样式 */
+/* 顶栏样式（保持之前的全屏覆盖） */
 .header {
     position: sticky;
     top: 0;
-    background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景（可调整透明度） */
-    -webkit-backdrop-filter: blur(10px); /* 兼容旧版 Safari */
-    backdrop-filter: blur(10px); /* 高斯模糊，10px为推荐值，可改5-15px */
-    padding: 15px 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 底部阴影增强层次感 */
-    z-index: 1000;
-    pointer-events: auto; /* 确保顶栏内元素可点击 */
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* 顶栏内容居中，如需左/右对齐可改left/right */
-}
-
-.logo {
-    height: 60px; /* logo高度，根据实际图片调整 */
-    margin-right: 15px; /* logo与标题间距 */
-    border-radius: 8px; /* 圆角（可选） */
-}
-
-.header-title {
-    color: #005f9f;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
     margin: 0;
-    font-size: 1.5em;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* 文字抗模糊阴影（可选） */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
 
-/* 内容容器：确保顶栏不遮挡题目 */
-.container {
-    margin-top: 80px; /* 根据顶栏高度调整，推荐80px（顶栏高度60px+上下padding） */
-    padding: 0 20px;
+/* 结果容器样式 */
+.result-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    animation: fadeIn 0.5s ease;
 }
 
-/* 成绩统计区域样式（原有） */
-#resultContainer h2 {
-    text-align: center;
-    font-size: 1.8em;
-    margin-bottom: 20px;
+.score {
+    font-size: 32px;
     color: #2c3e50;
 }
 
-/* 其他原有样式（如题目选项、按钮等）保持不变 */
+#qrcode {
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.student-info {
+    font-size: 18px;
+    color: #7f8c8d;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
