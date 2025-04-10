@@ -7,8 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 新增顶栏（置顶logo区域） -->
+    <header class="header">
+        <div class="logo-container">
+            <!-- 替换为你的学院logo图片路径，建议尺寸60x60px -->
+            <img src="学院logo.png" alt="学院logo" class="logo">
+            <h1 class="header-title">415国家安全日趣味答题</h1>
+        </div>
+    </header>
+
     <div class="container">
-        <h1>415国家安全日趣味答题</h1>
         <div id="quizContainer"></div>
         <button id="submitBtn" onclick="submitQuiz()">提交答案</button>
         <div id="resultContainer"></div>
