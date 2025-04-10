@@ -1,0 +1,9 @@
+/* 内容同之前的styles.css，无需修改内容，仅放置在css文件夹 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* 以下省略重复样式代码... */
