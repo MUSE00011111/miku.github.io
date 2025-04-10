@@ -1,0 +1,62 @@
+body {
+    font-family: '微软雅黑', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #005f9f;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.question {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.option {
+    margin: 10px 0;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.option:hover {
+    color: #007bff;
+}
+
+#submitBtn {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+#resultContainer {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.correct {
+    background-color: #e8f7e8;
+    border: 1px solid #4CAF50;
+}
+
+.incorrect {
+    background-color: #f7e8e8;
+    border: 1px solid #ff4444;
+}
