@@ -50,3 +50,4 @@ function showResult(score) {
         correctLevel: QRCode.CorrectLevel.H
     });
 }
+
