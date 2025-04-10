@@ -1,7 +1,0 @@
-项目/
-├─ index.html          （答题页面，含题目渲染和提交功能）
-├─ result.html         （结果页面，显示分数和二维码）
-├─ style.css           （公共样式文件，两页面共用）
-├─ script.js           （答题页逻辑，含题目加载和成绩计算）
-├─ questions.json      （题目数据文件，需包含至少10题）
-└─ 学院logo.png        （顶栏logo图片，建议60x60px）
