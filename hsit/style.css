@@ -89,6 +89,32 @@
     transform: translateX(8px);
 }
 
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: flex-start; /* logo居左 */
+}
+@supports (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px)) {
+    .header {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(18px);
+    }
+}
+@media (min-width: 768px) { /* 电脑端适配 */
+    .logo {
+        max-width: 150px; /* 电脑端显示更长logo */
+        height: auto;
+        margin-right: 20px;
+    }
+    .header-title {
+        font-size: 2em; /* 适配logo大小调整标题字体 */
+    }
+}
+
+
 /* 提交按钮 */
 #submitBtn {
     width: 100%;
