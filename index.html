@@ -1,29 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>湖商计算机团委办公室</title>
+    <title>HSIT | 计算机团委办公室</title>
     <style>
-        /* 引入指定字体文件，需将字体文件放在正确路径下 */
-        @font-face {
-            font-family: 'CustomFont';
-            src: url('your_font_file.ttf');
-        }
-
+        /* 去除默认的 body 边距 */
         body {
-            font-family: 'CustomFont', Arial, Helvetica, sans-serif;
-            background-color: #F5F5F5;
-            color: #333333;
             margin: 0;
-            padding: 0;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        body.dark-mode {
-            background-color: #121212;
-            color: #FFFFFF;
         }
 
         /* 顶部导航栏 */
@@ -31,18 +16,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 50px;
+            padding: 10px 20px; /* 调整导航栏内边距 */
             position: sticky;
             top: 0;
             background-color: rgba(224, 224, 224, 0.8);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             z-index: 100;
-            transition: background-color 0.3s ease;
-        }
-
-        body.dark-mode nav {
-            background-color: rgba(30, 30, 30, 0.8);
         }
 
         .nav-logo {
@@ -55,17 +35,30 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 40px;
+        }
+
+        /* 功能、定价、关于按钮集合 */
+        .nav-links-left {
+            display: flex;
+            align-items: center;
+            gap: 24px; /* 提升功能、定价、关于按钮间隙至18px */
+        }
+
+        /* 登录与立即开始按钮集合 */
+        .nav-links-right {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* 保持登录与立即开始按钮间隙不变 */
+        }
+
+        /* 两个集合之间的间隙 */
+        .nav-links-left + .nav-links-right {
+            margin-left: 45px; /* 提升两个集合间隙至24px */
         }
 
         .nav-links a {
             text-decoration: none;
             color: #333333;
-            transition: color 0.3s ease;
-        }
-
-        body.dark-mode .nav-links a {
-            color: #FFFFFF;
         }
 
         .nav-links button {
@@ -73,7 +66,6 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
 
         .btn-login {
@@ -81,479 +73,21 @@
             color: #000;
         }
 
-        body.dark-mode .btn-login {
-            background-color: #333333;
-            color: #FFFFFF;
-        }
-
-        .btn-login:hover {
-            background-color: #d4d4d4;
-        }
-
-        body.dark-mode .btn-login:hover {
-            background-color: #444444;
-        }
-
         .btn-get-started {
             background-color: #000;
             color: #FFFFFF;
         }
 
-        body.dark-mode .btn-get-started {
-            background-color: #FFFFFF;
-            color: #000;
-        }
-
-        .btn-get-started:hover {
-            background-color: #333;
-        }
-
-        body.dark-mode .btn-get-started:hover {
-            background-color: #EEEEEE;
-        }
-
-        /* 主内容区域 */
-        .hero {
-            text-align: center;
-            padding: 100px 50px;
-        }
-
-        .hero h1 {
-            font-size: clamp(32px, 5vw, 48px);
-        }
-
-        .hero h2 {
-            font-size: clamp(18px, 2.5vw, 24px);
-            font-weight: normal;
-            margin-bottom: 30px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .hero-buttons button {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .hero-img {
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 50px;
-        }
-
-        .hero-img img {
-            max-width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 10px;
-        }
-
-        /* 功能模块 */
-        .features {
-            text-align: center;
-            padding: 100px 50px;
-        }
-
-        .features h2 {
-            font-size: clamp(28px, 4vw, 36px);
-            margin-bottom: 50px;
-        }
-
-        .feature-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 50px;
-        }
-
-        .feature {
-            width: clamp(200px, 30vw, 300px);
-        }
-
-        /* 常见问题区域 */
-        .faq {
-            text-align: center;
-            padding: 100px 50px;
-        }
-
-        .faq h2 {
-            font-size: clamp(28px, 4vw, 36px);
-            margin-bottom: 50px;
-        }
-
-        .faq-question {
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
-
-        .faq-answer {
-            display: none;
-        }
-
-        /* 底部区域 */
-        .footer {
-            background-color: #e0e0e0;
-            text-align: center;
-            padding: 100px 50px;
-            transition: background-color 0.3s ease;
-        }
-
-        body.dark-mode .footer {
-            background-color: #222222;
-        }
-
-        .footer h2 {
-            font-size: clamp(28px, 4vw, 36px);
-            margin-bottom: 30px;
-        }
-
-        .footer button {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            background-color: #007BFF;
-            color: #000;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        body.dark-mode .footer button {
-            background-color: #0056b3;
-            color: #FFFFFF;
-        }
-
-        .footer button:hover {
-            background-color: #0056b3;
-        }
-
-        body.dark-mode .footer button:hover {
-            background-color: #004499;
-        }
-
-        .footer-nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 50px;
-            margin-top: 50px;
-        }
-
-        .footer-nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .footer-nav ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-nav ul li a {
-            text-decoration: none;
-            color: #333333;
-            transition: color 0.3s ease;
-        }
-
-        body.dark-mode .footer-nav ul li a {
-            color: #FFFFFF;
-        }
-
-        .social-links {
-            margin-top: 50px;
-        }
-
-        .social-links a {
-            margin: 0 10px;
-            color: #333333;
-            transition: color 0.3s ease;
-        }
-
-        body.dark-mode .social-links a {
-            color: #FFFFFF;
-        }
-
-        .copyright {
-            margin-top: 50px;
-        }
-
-        /* 响应式设计 */
-        @media (max - width: 768px) {
-            nav {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .nav-links {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                width: 100%;
-                padding-top: 20px;
-            }
-        }
-
-        /* 悬浮按钮 */
-        .floating-button {
+        /* 全屏视频背景 */
+        video {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #000;
-            color: #FFFFFF;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            z-index: 100;
-        }
-
-        .floating-button:hover {
-            background-color: #333;
-        }
-
-        /* 按钮图标切换动画 */
-        #dark-mode-icon,
-        #scroll-to-top-icon {
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* 登录注册弹窗 */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 10% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: clamp(250px, 80vw, 300px);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        body.dark-mode .modal-content {
-            background-color: #222222;
-            color: #FFFFFF;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        body.dark-mode .form-group input {
-            background-color: #333333;
-            color: #FFFFFF;
-            border-color: #555555;
-        }
-
-        .form-group button {
-            width: 100%;
-            padding: 10px;
-            background-color: #000;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        body.dark-mode .form-group button {
-            background-color: #FFFFFF;
-            color: #000;
-        }
-
-        .form-group button:hover {
-            background-color: #333;
-        }
-
-        body.dark-mode .form-group button:hover {
-            background-color: #EEEEEE;
-        }
-
-        .toggle-form {
-            text-align: center;
-            margin-top: 10px;
-            cursor: pointer;
-            color: #007BFF;
-        }
-
-        body.dark-mode .toggle-form {
-            color: #0056b3;
-        }
-
-        .error-message {
-            color: red;
-            margin-top: 5px;
-        }
-
-        /* 视频播放区 */
-        .video-section {
-            text-align: center;
-            padding: 100px 50px;
-        }
-
-        .video-section h2 {
-            font-size: clamp(28px, 4vw, 36px);
-            margin-bottom: 30px;
-        }
-
-        .video-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .video-container video {
-            width: 100%;
-            height: auto;
-        }
-
-        /* 文件下载站样式 */
-        .file-download-section {
-            text-align: center;
-            padding: 100px 50px;
-        }
-
-        .file-download-section h2 {
-            font-size: clamp(28px, 4vw, 36px);
-            margin-bottom: 30px;
-        }
-
-        .file-upload {
-            margin-bottom: 30px;
-        }
-
-        .file-upload input[type="file"] {
-            display: none;
-        }
-
-        .file-upload label {
-            padding: 10px 20px;
-            background-color: #000;
-            color: #FFFFFF;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .file-upload label:hover {
-            background-color: #333;
-        }
-
-        .file-upload button {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-left: 10px;
-        }
-
-        .file-upload button:hover {
-            background-color: #0056b3;
-        }
-
-        .file-search {
-            margin-bottom: 30px;
-        }
-
-        .file-search input[type="text"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .file-search button {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-left: 10px;
-        }
-
-        .file-search button:hover {
-            background-color: #0056b3;
-        }
-
-        .file-list {
-            display: table;
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .file-list th,
-        .file-list td {
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
-
-        .file-list th {
-            background-color: #f0f0f0;
-        }
-
-        body.dark-mode .file-list th {
-            background-color: #333333;
+            object-fit: cover;
+            z-index: -1;
+            pointer-events: none; /* 让用户无法触碰视频控件 */
         }
     </style>
 </head>
@@ -562,383 +96,27 @@
     <!-- 顶部导航栏 -->
     <nav>
         <div class="nav-logo">
-            BankApp
+            HSIT
         </div>
         <div class="nav-links">
-            <a href="#" onclick="alert('页面跳转暂未实现')">功能</a>
-            <a href="#" onclick="alert('页面跳转暂未实现')">定价</a>
-            <a href="#" onclick="alert('页面跳转暂未实现')">关于</a>
-            <a href="#" onclick="openFileDownloadSection()">下载</a>
-            <button class="btn-login" onclick="openLoginModal()">登录</button>
-            <button class="btn-get-started" onclick="scrollToCreateAccount()">立即开始</button>
+            <div class="nav-links-left">
+                <a href="#" onclick="alert('页面跳转暂未实现')">功能</a>
+                <a href="#" onclick="alert('页面跳转暂未实现')">定价</a>
+                <a href="#" onclick="alert('页面跳转暂未实现')">关于</a>
+            </div>
+            <div class="nav-links-right">
+                <button class="btn-login" onclick="alert('登录功能暂未实现')">登录</button>
+                <button class="btn-get-started" onclick="alert('页面跳转暂未实现')">立即开始</button>
+            </div>
         </div>
     </nav>
 
-    <!-- 主内容区域 -->
-    <div class="hero">
-        <h1>更改您使用的银行账户</h1>
-        <h2>体验重新构想的银行业务。简单、安全，专为现代世界设计。</h2>
-        <div class="hero-buttons">
-            <button class="btn-get-started" onclick="scrollToCreateAccount()">立即开始</button>
-            <button onclick="alert('功能详情页跳转暂未实现')">了解更多</button>
-        </div>
-        <div class="hero-img">
-            <img src="https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/image_generation/f79cee5b8986d56b9d67eb754d2c0fb0_1741677298377196362.jpeg~tplv-a9rns2rl98-image.jpeg?rk3s=25bff839&x-expires=1773213298&x-signature=x99wKGT1vj9papUAhuUZoG8LJFY%3D" alt="数据看板">
-        </div>
-    </div>
-
-    <!-- 功能模块 -->
-    <div class="features">
-        <h2>为您设计的功能</h2>
-        <div class="feature-list">
-            <div class="feature">
-                <h3>安全交易</h3>
-                <p>银行级加密保障所有交易</p>
-            </div>
-            <div class="feature">
-                <h3>实时更新</h3>
-                <p>即时获取账户活动通知</p>
-            </div>
-            <div class="feature">
-                <h3>智能储蓄</h3>
-                <p>AI驱动的洞察助您节省更多</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 常见问题区域 -->
-    <div class="faq">
-        <h2>常见问题解答</h2>
-        <div class="faq-question" onclick="toggleAnswer(this)">我的数据有多安全？</div>
-        <div class="faq-answer">我们采用银行级加密技术保障您的数据安全。</div>
-        <div class="faq-question" onclick="toggleAnswer(this)">费用是多少？</div>
-        <div class="faq-answer">费用根据不同的服务和套餐而定，具体请查看定价页面。</div>
-        <div class="faq-question" onclick="toggleAnswer(this)">如何开始使用？</div>
-        <div class="faq-answer">您可以点击“立即开始”按钮，然后按照提示进行操作。</div>
-    </div>
-
-    <!-- 视频播放区 -->
-    <div class="video-section">
-        <h2>视频展示</h2>
-        <div class="video-container">
-            <video controls>
-                <source src="/%E8%8A%99%E5%AE%81%E5%A8%9Cfurina.mp4" type="video/mp4">
-                您的浏览器不支持视频播放。
-            </video>
-        </div>
-    </div>
-
-    <!-- 文件下载站 -->
-    <div class="file-download-section" id="file-download-section" style="display: none;">
-        <h2>文件下载站</h2>
-        <div class="file-upload">
-            <input type="file" id="file-upload-input" accept="*">
-            <label for="file-upload-input">选择文件</label>
-            <button onclick="uploadFile()">上传</button>
-        </div>
-        <div class="file-search">
-            <input type="text" id="file-search-input" placeholder="搜索文件">
-            <button onclick="searchFiles()">搜索</button>
-        </div>
-        <table class="file-list" id="file-list">
-            <thead>
-                <tr>
-                    <th>文件名</th>
-                    <th>上传日期</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-
-    <!-- 底部区域 -->
-    <div class="footer">
-        <h2>准备好开始了吗？加入数千名已经转换银行的满意客户。</h2>
-        <button onclick="alert('注册表单暂未实现')" id="create-account">创建账户</button>
-        <div class="footer-nav">
-            <ul>
-                <li><a href="#" onclick="alert('页面跳转暂未实现')">功能</a></li>
-                <li><a href="#" onclick="alert('页面跳转暂未实现')">定价</a></li>
-                <li><a href="#" onclick="alert('页面跳转暂未实现')">安全</a></li>
-            </ul>
-            <ul>
-                <li><a href="#" onclick="alert('页面跳转暂未实现')">关于我们</a></li>
-                <li><a href="#" onclick="alert('页面跳转暂未实现')">职业发展</a></li>
-                <li><a href="#" onclick="alert('页面跳转暂未实现')">联系我们</a></li>
-            </ul>
-            <ul>
-                <li><a href="#" onclick="alert('页面跳转暂未实现')">文档</a></li>
-                <li><a href="#" onclick="alert('页面跳转暂未实现')">博客</a></li>
-                <li><a href="#" onclick="alert('页面跳转暂未实现')">帮助中心</a></li>
-            </ul>
-            <ul>
-                <li><a href="#" onclick="alert('页面跳转暂未实现')">隐私</a></li>
-                <li><a href="#" onclick="alert('页面跳转暂未实现')">条款</a></li>
-                <li><a href="#" onclick="alert('页面跳转暂未实现')">Cookies</a></li>
-            </ul>
-        </div>
-        <div class="social-links">
-            <a href="#" target="_blank" onclick="alert('社交媒体链接跳转暂未实现')">Twitter</a>
-            <a href="#" target="_blank" onclick="alert('社交媒体链接跳转暂未实现')">LinkedIn</a>
-        </div>
-        <div class="copyright">
-            © 2024 BankApp 版权所有
-        </div>
-    </div>
-
-    <!-- 悬浮按钮 -->
-    <div class="floating-button" id="combined-button">
-        <i class="fa-solid fa-moon" id="dark-mode-icon"></i>
-        <i class="fa-solid fa-arrow-up" id="scroll-to-top-icon" style="opacity: 0; transform: translate(-50%, -50%) scale(0.5);"></i>
-    </div>
-
-    <!-- 登录模态框 -->
-    <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeLoginModal()">&times;</span>
-            <h2>登录</h2>
-            <div class="form-group">
-                <label for="login-username">用户名</label>
-                <input type="text" id="login-username" placeholder="输入用户名">
-                <div class="error-message" id="login-username-error"></div>
-            </div>
-            <div class="form-group">
-                <label for="login-password">密码</label>
-                <input type="password" id="login-password" placeholder="输入密码">
-                <div class="error-message" id="login-password-error"></div>
-            </div>
-            <div class="form-group">
-                <button onclick="login()">登录</button>
-            </div>
-            <div class="toggle-form" onclick="showRegisterModal()">没有账户？注册</div>
-        </div>
-    </div>
-
-    <!-- 注册模态框 -->
-    <div id="register-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeRegisterModal()">&times;</span>
-            <h2>注册</h2>
-            <div class="form-group">
-                <label for="register-username">用户名</label>
-                <input type="text" id="register-username" placeholder="输入用户名">
-                <div class="error-message" id="register-username-error"></div>
-            </div>
-            <div class="form-group">
-                <label for="register-password">密码</label>
-                <input type="password" id="register-password" placeholder="输入密码">
-                <div class="error-message" id="register-password-error"></div>
-            </div>
-            <div class="form-group">
-                <label for="register-confirm-password">确认密码</label>
-                <input type="password" id="register-confirm-password" placeholder="再次输入密码">
-                <div class="error-message" id="register-confirm-password-error"></div>
-            </div>
-            <div class="form-group">
-                <button onclick="register()">注册</button>
-            </div>
-            <div class="toggle-form" onclick="showLoginModal()">已有账户？登录</div>
-        </div>
-    </div>
-
-    <script>
-        function scrollToCreateAccount() {
-            const createAccountButton = document.getElementById('create-account');
-            createAccountButton.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function toggleAnswer(question) {
-            const answer = question.nextElementSibling;
-            answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function toggleDarkMode() {
-            const body = document.body;
-            body.classList.toggle('dark-mode');
-            const moonIcon = document.getElementById('dark-mode-icon');
-            moonIcon.classList.toggle('fa-moon');
-            moonIcon.classList.toggle('fa-sun');
-        }
-
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        window.addEventListener('scroll', function () {
-            const combinedButton = document.getElementById('combined-button');
-            const darkModeIcon = document.getElementById('dark-mode-icon');
-            const scrollToTopIcon = document.getElementById('scroll-to-top-icon');
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-                darkModeIcon.style.opacity = 0;
-                darkModeIcon.style.transform = 'translate(-50%, -50%) scale(0.5)';
-                scrollToTopIcon.style.opacity = 1;
-                scrollToTopIcon.style.transform = 'translate(-50%, -50%) scale(1)';
-                combinedButton.onclick = scrollToTop;
-            } else {
-                darkModeIcon.style.opacity = 1;
-                darkModeIcon.style.transform = 'translate(-50%, -50%) scale(1)';
-                scrollToTopIcon.style.opacity = 0;
-                scrollToTopIcon.style.transform = 'translate(-50%, -50%) scale(0.5)';
-                combinedButton.onclick = toggleDarkMode;
-            }
-        });
-
-        // 初始化暗黑模式按钮图标
-        const body = document.body;
-        const moonIcon = document.getElementById('dark-mode-icon');
-        if (body.classList.contains('dark-mode')) {
-            moonIcon.classList.remove('fa-moon');
-            moonIcon.classList.add('fa-sun');
-        }
-
-        // 登录注册模态框相关函数
-        function openLoginModal() {
-            document.getElementById('login-modal').style.display = 'block';
-        }
-
-        function closeLoginModal() {
-            document.getElementById('login-modal').style.display = 'none';
-        }
-
-        function showRegisterModal() {
-            document.getElementById('login-modal').style.display = 'none';
-            document.getElementById('register-modal').style.display = 'block';
-        }
-
-        function closeRegisterModal() {
-            document.getElementById('register-modal').style.display = 'none';
-        }
-
-        function showLoginModal() {
-            document.getElementById('register-modal').style.display = 'none';
-            document.getElementById('login-modal').style.display = 'block';
-        }
-
-        function login() {
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-password').value;
-            const usernameError = document.getElementById('login-username-error');
-            const passwordError = document.getElementById('login-password-error');
-
-            if (username === '') {
-                usernameError.textContent = '用户名不能为空';
-            } else {
-                usernameError.textContent = '';
-            }
-
-            if (password === '') {
-                passwordError.textContent = '密码不能为空';
-            } else {
-                passwordError.textContent = '';
-            }
-
-            if (username && password) {
-                alert('登录成功！这里仅为演示，实际应发送请求到服务器验证。');
-                closeLoginModal();
-            }
-        }
-
-        function register() {
-            const username = document.getElementById('register-username').value;
-            const password = document.getElementById('register-password').value;
-            const confirmPassword = document.getElementById('register-confirm-password').value;
-            const usernameError = document.getElementById('register-username-error');
-            const passwordError = document.getElementById('register-password-error');
-            const confirmPasswordError = document.getElementById('register-confirm-password-error');
-
-            if (username === '') {
-                usernameError.textContent = '用户名不能为空';
-            } else {
-                usernameError.textContent = '';
-            }
-
-            if (password === '') {
-                passwordError.textContent = '密码不能为空';
-            } else {
-                passwordError.textContent = '';
-            }
-
-            if (confirmPassword === '') {
-                confirmPasswordError.textContent = '请确认密码';
-            } else if (password!== confirmPassword) {
-                confirmPasswordError.textContent = '两次输入的密码不一致';
-            } else {
-                confirmPasswordError.textContent = '';
-            }
-
-            if (username && password && password === confirmPassword) {
-                alert('注册成功！这里仅为演示，实际应发送请求到服务器存储用户信息。');
-                closeRegisterModal();
-            }
-        }
-
-        // 文件下载站相关函数
-        function openFileDownloadSection() {
-            const fileDownloadSection = document.getElementById('file-download-section');
-            fileDownloadSection.style.display = 'block';
-            window.scrollTo({
-                top: fileDownloadSection.offsetTop,
-                behavior: 'smooth'
-            });
-        }
-
-        const files = [];
-
-        function uploadFile() {
-            const fileInput = document.getElementById('file-upload-input');
-            const file = fileInput.files[0];
-            if (file) {
-                const uploadDate = new Date().toLocaleDateString();
-                const newFile = {
-                    name: file.name,
-                    uploadDate: uploadDate
-                };
-                files.push(newFile);
-                updateFileTable();
-                alert('文件上传成功');
-            } else {
-                alert('请选择要上传的文件');
-            }
-        }
-
-        function searchFiles() {
-            const searchInput = document.getElementById('file-search-input');
-            const searchTerm = searchInput.value.toLowerCase();
-            const filteredFiles = files.filter(file => file.name.toLowerCase().includes(searchTerm));
-            updateFileTable(filteredFiles);
-        }
-
-        function updateFileTable(fileList = files) {
-            const tableBody = document.querySelector('#fileList tbody');
-            tableBody.innerHTML = '';
-            fileList.forEach(file => {
-                const row = document.createElement('tr');
-                const nameCell = document.createElement('td');
-                const dateCell = document.createElement('td');
-                const actionCell = document.createElement('td');
-
-                nameCell.textContent = file.name;
-                dateCell.textContent = file.uploadDate;
-
-                const downloadLink = document.createElement('a');
-                downloadLink.href = `#`;
-                downloadLink.textContent = '下载';
-                downloadLink.classList.add('download-link');
-                actionCell.appendChild(downloadLink);
-
-                row.appendChild(nameCell);
-                row.appendChild(dateCell);
-                row.appendChild(actionCell);
-                tableBody.appendChild(row);
-            });
-        }
-    </script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 全屏自动循环播放视频 -->
+    <video autoplay loop muted>
+        <!-- 请替换为实际的视频文件路径 -->
+        <source src="/%E8%8A%99%E5%AE%81%E5%A8%9Cfurina.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+    </video>
 </body>
 
 </html>    
