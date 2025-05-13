@@ -25,14 +25,21 @@
             -webkit-backdrop-filter: blur(20px);
             z-index: 100;
         }
+        
+        @font-face {
+            font-family: 'Chillax';
+            src: url('//mikux.fun/assets/fonts/Chillax-Semibold.otf') format('opentype');
+            font-weight: 600;
+            font-style: normal;
+        }
 
         .nav-logo {
             display: flex;
             align-items: center;
             font-size: 20px;
             font-weight: bold;
+            font-family: 'Chillax', sans-serif; /* Apply the custom font */
         }
-
         /* 新的汉堡菜单样式 */
         .hamburger {
             cursor: pointer;
