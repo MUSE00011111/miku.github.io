@@ -243,6 +243,41 @@
                 filter: blur(5px);
             }
         }
+        /* 定价按钮的父级容器样式 */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* 隐藏的二级菜单 */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 10px 0;
+            z-index: 100;
+            border-radius: 4px;
+            min-width: 120px;
+        }
+        
+        /* 二级菜单中的链接样式 */
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #333333;
+            white-space: nowrap;
+        }
+        
+        .dropdown-menu a:hover {
+            background-color: #f5f5f5;
+        }
+        
+        /* 当鼠标悬停时显示二级菜单 */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
     </style>
 </head>
 
@@ -261,13 +296,20 @@
         </label>
         <div class="nav-links">
             <div class="nav-links-left">
-                <a href="#" onclick="alert('页面跳转暂未实现')">功能</a>
-                <a href="#" onclick="alert('页面跳转暂未实现')">定价</a>
-                <a href="#" onclick="alert('页面跳转暂未实现')">关于</a>
+                <a href="//xc.mikux.fun">相册</a>
+                <div class="dropdown">
+                    <a href="#">定价</a>
+                    <div class="dropdown-menu">
+                        <a href="#">基础版</a>
+                        <a href="#">高级版</a>
+                        <a href="#">专业版</a>
+                    </div>
+                </div>
+                <a href="#">关于</a>
             </div>
             <div class="nav-links-right">
-                <button class="btn-login" onclick="alert('登录功能暂未实现')">登录</button>
-                <button class="btn-get-started" onclick="alert('页面跳转暂未实现')">立即开始</button>
+                <button class="btn-login">登录</button>
+                <button class="btn-get-started">立即开始</button>
             </div>
         </div>
     </nav>
