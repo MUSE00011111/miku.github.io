@@ -327,16 +327,16 @@
         <source src="//mikux.fun/furina.mp4" type="video/mp4">
         您的浏览器不支持视频播放。
     </video>
-    <h1 id="hitokoto">
-        <a></a>
-    </h1>
+    <p id="hi">
+    <a href="#" id="hi">...</a>
+    </p>
     <script>
         fetch('https://v1.hitokoto.cn')
         .then(response => response.json())
         .then(data => {
-            const hitokoto = document.querySelector('#hitokoto_text')
-            hitokoto.href = `https://hitokoto.cn/?uuid=${data.uuid}`
-            hitokoto.innerText = data.hitokoto
+            const hitokoto = document.querySelector('#hi')
+            hi.href = `https://hitokoto.cn/?uuid=${data.uuid}`
+            hi.innerText = ""
         })
         .catch(console.error)
         
