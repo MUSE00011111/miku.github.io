@@ -305,7 +305,7 @@
             <div class="nav-links-left">
                 <a href="//xc.mikux.fun">相册</a>
                 <div class="dropdown">
-                    <a href="#">定价</a>
+                    <a href="#">更多</a>
                     <div class="dropdown-menu">
                         <a href="#">基础版</a>
                         <a href="#">高级版</a>
@@ -327,8 +327,19 @@
         <source src="//mikux.fun/furina.mp4" type="video/mp4">
         您的浏览器不支持视频播放。
     </video>
-
+    <h1 id="hitokoto">
+        <a href="#" id="hitokoto_text">:D 获取中...</a>
+    </h1>
     <script>
+        fetch('https://v1.hitokoto.cn')
+        .then(response => response.json())
+        .then(data => {
+            const hitokoto = document.querySelector('#hitokoto_text')
+            hitokoto.href = `https://hitokoto.cn/?uuid=${data.uuid}`
+            hitokoto.innerText = data.hitokoto
+        })
+        .catch(console.error)
+        
         function toggleNavLinks() {
             const navLinks = document.querySelector('.nav-links');
             const isActive = navLinks.classList.contains('active');
