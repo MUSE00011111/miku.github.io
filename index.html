@@ -331,11 +331,10 @@
         <a href="#" id="hitokoto_text">:D 获取中...</a>
     </h1>
     <script>
-        fetch('https://v1.hitokoto.cn')
+        fetch('https://v1.hitokoto.cn/?c=f&encode=text')
         .then(response => response.json())
         .then(data => {
             const hitokoto = document.querySelector('#hitokoto_text')
-            hitokoto.href = `https://hitokoto.cn/?uuid=${data.uuid}`
             hitokoto.innerText = data.hitokoto
         })
         .catch(console.error)
