@@ -416,10 +416,14 @@
     </div>    
     <script>
         fetch('https://v1.hitokoto.cn/?c=b')
-        .then(response => response.json())
-        .then(data => {
-            const hitokotoElement = document.getElementById('hitokoto');
-            const source = data.from;
+            .then(response => response.json())
+            .then(data => {
+                const hitokotoElement = document.getElementById('hitokoto');
+                hitokotoElement.textContent = data.hitokoto; // 将获取的文本内容加载到 <p> 元素中
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
     
             // 在内容加载完成后，动态更新宽度
             const hitokotoWidth = hitokotoElement.offsetWidth;
