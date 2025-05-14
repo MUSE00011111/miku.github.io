@@ -419,6 +419,21 @@
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
+
+        // 获取 p#hitokoto 和 div#random-component 元素
+        const hitokotoElement = document.querySelector('p#hitokoto');
+        const randomComponentElement = document.querySelector('div#random-component');
+        
+        // 检查元素是否存在
+        if (hitokotoElement && randomComponentElement) {
+            // 获取 p#hitokoto 的宽度
+            const hitokotoWidth = hitokotoElement.offsetWidth;
+        
+            // 设置 div#random-component 的宽度为 p#hitokoto 的宽度 + 70px
+            randomComponentElement.style.width = (hitokotoWidth + 70) + 'px';
+        } else {
+            console.error('p#hitokoto 或 div#random-component 未找到');
+        }
         
         function toggleNavLinks() {
             const navLinks = document.querySelector('.nav-links');
