@@ -285,6 +285,46 @@
         .dropdown:hover .dropdown-menu {
             display: block;
         }
+        /* 顶栏的样式示例 */
+        #top-bar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 60px; /* 示例高度，可根据实际调整 */
+          background-color: #333;
+          z-index: 10;
+        }
+        
+        /* 随机组件的样式 */
+        #random-component {
+          position: absolute;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 200px;
+          height: 100px;
+          background: rgba(255, 255, 255, 0.4);
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          border-radius: 14px;
+          backdrop-filter: blur(20px);
+          overflow: hidden;
+          margin: 30px; /* 添加的边距 */
+        }
+        
+        #random-component p {
+          margin: 0;
+          text-align: center;
+        }
+        
+        .icon-wrapper {
+          position: absolute;
+          bottom: 10px;
+          right: 10px;
+          background: rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
+          padding: 5px;
+        }
     </style>
 </head>
 
@@ -307,7 +347,7 @@
                 <div class="dropdown">
                     <a href="#">更多</a>
                     <div class="dropdown-menu">
-                        <a href="#">基础版</a>
+                        <a href="#">壁纸站</a>
                         <a href="#">高级版</a>
                         <a href="#">专业版</a>
                     </div>
@@ -324,9 +364,17 @@
     <video id="background-video" autoplay loop muted>
         您的浏览器不支持视频播放。
     </video>   
-    <p id="hi">
-    <a href="#" id="hi">...</a>
-    </p>
+    <div id="random-component">
+      <div class="background">
+        <p>文本内容区</p>
+        <div class="icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
+            <path fill="currentColor" d="M12 6.5C11.17 6.5 10.5 7.17 10.5 8S11.17 9.5 12 9.5 13.5 8.83 13.5 8 12.83 6.5 12 6.5zM11 11h2v6h-2z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>    
     <script>
         fetch('https://v1.hitokoto.cn')
         .then(response => response.json())
@@ -354,50 +402,81 @@
             }
         }
         // 定义一个视频文件数组
-    const videos = [
-        "//mikux.fun/furina.mp4",
-        "//mikux.fun/miku-x.mp4",
-        "//mikux.fun/chill.mp4",
-        "//mikux.fun/ATL-01.mp4"
-    ];
+        const videos = [
+            "//mikux.fun/furina.mp4",
+            "//mikux.fun/miku-x.mp4",
+            "//mikux.fun/chill.mp4",
+            "//mikux.fun/ATL-01.mp4"
+        ];
 
-    // 随机选择一个视频
-    const randomIndex = Math.floor(Math.random() * videos.length);
-    const selectedVideo = videos[randomIndex];
+        // 随机选择一个视频
+        const randomIndex = Math.floor(Math.random() * videos.length);
+        const selectedVideo = videos[randomIndex];
+    
+        // 设置视频源
+        const videoElement = document.getElementById('background-video');
+        const sourceElement = document.createElement('source');
+        sourceElement.src = selectedVideo;
+        sourceElement.type = 'video/mp4';
+        videoElement.appendChild(sourceElement);
+    
+        // Hitokoto API 使用
+        fetch('https://v1.hitokoto.cn')
+            .then(response => response.json())
+            .then(data => {
+                const hitokoto = document.querySelector('#hi');
+                hi.href = `https://hitokoto.cn/?uuid=${data.uuid}`;
+                hi.innerText = "";
+            })
+            .catch(console.error);
 
-    // 设置视频源
-    const videoElement = document.getElementById('background-video');
-    const sourceElement = document.createElement('source');
-    sourceElement.src = selectedVideo;
-    sourceElement.type = 'video/mp4';
-    videoElement.appendChild(sourceElement);
-
-    // Hitokoto API 使用
-    fetch('https://v1.hitokoto.cn')
-        .then(response => response.json())
-        .then(data => {
-            const hitokoto = document.querySelector('#hi');
-            hi.href = `https://hitokoto.cn/?uuid=${data.uuid}`;
-            hi.innerText = "";
-        })
-        .catch(console.error);
-
-    function toggleNavLinks() {
-        const navLinks = document.querySelector('.nav-links');
-        const isActive = navLinks.classList.contains('active');
-
-        if (isActive) {
-            navLinks.classList.remove('active');
-            navLinks.classList.add('closing');
-            setTimeout(() => {
-                navLinks.classList.remove('closing');
-                navLinks.style.display = 'none';
-            }, 300);
-        } else {
-            navLinks.style.display = 'flex';
-            navLinks.classList.add('active');
+        function toggleNavLinks() {
+            const navLinks = document.querySelector('.nav-links');
+            const isActive = navLinks.classList.contains('active');
+    
+            if (isActive) {
+                navLinks.classList.remove('active');
+                navLinks.classList.add('closing');
+                setTimeout(() => {
+                    navLinks.classList.remove('closing');
+                    navLinks.style.display = 'none';
+                }, 300);
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.classList.add('active');
+            }
         }
-    }
+        document.addEventListener("DOMContentLoaded", () => {
+          const component = document.getElementById("random-component");
+          const topBar = document.getElementById("top-bar");
+        
+          function getRandomPosition() {
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+        
+            const topBarHeight = topBar ? topBar.offsetHeight : 0;
+        
+            const componentWidth = component.offsetWidth;
+            const componentHeight = component.offsetHeight;
+        
+            const x = Math.random() * (viewportWidth - componentWidth);
+            const y = Math.random() * (viewportHeight - componentHeight - topBarHeight) + topBarHeight;
+        
+            return { x, y };
+          }
+        
+          function setPosition() {
+            const { x, y } = getRandomPosition();
+            component.style.left = `${x}px`;
+            component.style.top = `${y}px`;
+          }
+        
+          // 设置初始位置
+          setPosition();
+        
+          // 如果窗口大小改变，重新设置位置
+          window.addEventListener("resize", setPosition);
+        });
     </script>
 </body>
 
