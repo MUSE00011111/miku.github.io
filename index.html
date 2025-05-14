@@ -320,13 +320,10 @@
             </div>
         </div>
     </nav>
-
     <!-- 全屏自动循环播放视频 -->
-    <video autoplay loop muted>
-        <!-- 请替换为实际的视频文件路径 -->
-        <source src="//mikux.fun/furina.mp4" type="video/mp4">
+    <video id="background-video" autoplay loop muted>
         您的浏览器不支持视频播放。
-    </video>
+    </video>   
     <p id="hi">
     <a href="#" id="hi">...</a>
     </p>
@@ -356,6 +353,49 @@
                 navLinks.classList.add('active');
             }
         }
+        // 定义一个视频文件数组
+    const videos = [
+        "//mikux.fun/furina.mp4", 
+        "//mikux.fun/ATL-01.mp4"
+    ];
+
+    // 随机选择一个视频
+    const randomIndex = Math.floor(Math.random() * videos.length);
+    const selectedVideo = videos[randomIndex];
+
+    // 设置视频源
+    const videoElement = document.getElementById('background-video');
+    const sourceElement = document.createElement('source');
+    sourceElement.src = selectedVideo;
+    sourceElement.type = 'video/mp4';
+    videoElement.appendChild(sourceElement);
+
+    // Hitokoto API 使用
+    fetch('https://v1.hitokoto.cn')
+        .then(response => response.json())
+        .then(data => {
+            const hitokoto = document.querySelector('#hi');
+            hi.href = `https://hitokoto.cn/?uuid=${data.uuid}`;
+            hi.innerText = "";
+        })
+        .catch(console.error);
+
+    function toggleNavLinks() {
+        const navLinks = document.querySelector('.nav-links');
+        const isActive = navLinks.classList.contains('active');
+
+        if (isActive) {
+            navLinks.classList.remove('active');
+            navLinks.classList.add('closing');
+            setTimeout(() => {
+                navLinks.classList.remove('closing');
+                navLinks.style.display = 'none';
+            }, 300);
+        } else {
+            navLinks.style.display = 'flex';
+            navLinks.classList.add('active');
+        }
+    }
     </script>
 </body>
 
