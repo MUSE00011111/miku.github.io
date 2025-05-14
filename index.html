@@ -416,12 +416,16 @@
         fetch('https://v1.hitokoto.cn/?c=b')
             .then(response => response.json())
             .then(data => {
-                const hitokoto = data.hitokoto; // 获取一言的文本
-                document.getElementById('hitokoto').innerText = hitokoto;
+                const hitokotoElement = document.getElementById('hitokoto');
+                hitokotoElement.textContent = data.hitokoto; // 加载内容
+        
+                // 在内容加载完成后，动态更新宽度
+                const hitokotoWidth = hitokotoElement.offsetWidth;
+                const randomComponentElement = document.getElementById('random-component');
+                randomComponentElement.style.width = (hitokotoWidth + 70) + 'px';
             })
             .catch(error => {
-                console.error('获取一言时出错:', error);
-                document.getElementById('hitokoto').innerText = '加载失败，请稍后重试。';
+                console.error('Error fetching data:', error);
             });
         
         function toggleNavLinks() {
