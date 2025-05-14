@@ -482,24 +482,20 @@
           const component = document.getElementById("random-component");
           const topBar = document.getElementById("top-bar");
         
-          // 生成随机位置（限制在页面下三分之一范围）
-          function getRandomPosition() {
+        // 生成随机位置（限制在页面底部五分之一范围）
+        function getRandomPosition() {
             const viewportWidth = window.innerWidth;
             const viewportHeight = window.innerHeight;
-        
-            const topBarHeight = topBar ? topBar.offsetHeight : 0;
-        
+    
             const componentWidth = component.offsetWidth;
             const componentHeight = component.offsetHeight;
-        
-            const x = Math.random() * (viewportWidth - componentWidth);
-            const y =
-              Math.random() *
-                (viewportHeight * (2 / 3) - componentHeight - topBarHeight) +
-              viewportHeight * (1 / 3);
-        
+    
+            // 计算位于页面底部五分之一区域的随机位置
+            const x = Math.random() * (viewportWidth - componentWidth); // 横向随机位置
+            const y = viewportHeight * (4 / 5) + Math.random() * (viewportHeight * (1 / 5) - componentHeight); // 纵向限制在底部五分之一
+    
             return { x, y };
-          }
+        }
         
           // 设置组件位置
           function setPosition() {
