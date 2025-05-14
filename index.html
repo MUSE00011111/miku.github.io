@@ -544,32 +544,44 @@
         console.log('div#random-component width:', randomComponentElement.offsetWidth);
 
         document.addEventListener("DOMContentLoaded", function () {
+            console.log("DOMContentLoaded 已触发！");
             const iconWrapper = document.querySelector(".icon-wrapper");
             const hitokoto = document.querySelector("#hitokoto");
-    
-            if (iconWrapper && hitokoto) {
-                iconWrapper.style.cursor = "pointer"; // 确保鼠标样式为可点击
-                iconWrapper.addEventListener("click", function () {
-                    const text = hitokoto.textContent || hitokoto.innerText;
-    
-                    if (!text) {
-                        alert("=⩌⩊⩌= 无可copy内容！");
-                        return;
-                    }
-    
-                    navigator.clipboard.writeText(text).then(() => {
-                        alert("文本已复制到剪贴板！");
-                    }).catch(err => {
-                        alert("错误请重试！");
-                        console.error("复制到剪贴板失败: ", err);
-                    });
-                });
-            } else {
-                console.error("未找到 .icon-wrapper 或 #hitokoto 元素！");
+        
+            // 检查元素是否存在
+            if (!iconWrapper) {
+                console.error("未找到 .icon-wrapper 元素！");
+                return;
             }
+            if (!hitokoto) {
+                console.error("未找到 #hitokoto 元素！");
+                return;
+            }
+        
+            console.log("iconWrapper 和 hitokoto 已找到！");
+            iconWrapper.style.cursor = "pointer"; // 鼠标样式为手型
+        
+            // 绑定点击事件
+            iconWrapper.addEventListener("click", function () {
+                console.log("iconWrapper 被点击！");
+                const text = hitokoto.textContent || hitokoto.innerText;
+        
+                if (!text) {
+                    alert("=⩌⩊⩌= 无可copy内容！");
+                    console.warn("hitokoto 文本为空！");
+                    return;
+                }
+        
+                // 尝试复制到剪贴板
+                navigator.clipboard.writeText(text).then(() => {
+                    alert("文本已复制到剪贴板！");
+                    console.log("复制成功：", text);
+                }).catch(err => {
+                    alert("复制失败，请重试！");
+                    console.error("复制到剪贴板失败: ", err);
+                });
+            });
         });
-        console.log("iconWrapper:", iconWrapper);
-        console.log("hitokoto:", hitokoto);
     </script>
 </body>
 
