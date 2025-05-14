@@ -539,6 +539,23 @@
         });
         console.log('p#hitokoto width:', hitokotoElement.offsetWidth);
         console.log('div#random-component width:', randomComponentElement.offsetWidth);
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const iconWrapper = document.querySelector(".icon-wrapper");
+            const hitokoto = document.querySelector("#hitokoto");
+          // 文本复制到剪贴板
+            if (iconWrapper && hitokoto) {
+                iconWrapper.addEventListener("click", function () {
+                    const text = hitokoto.textContent || hitokoto.innerText;
+                    navigator.clipboard.writeText(text).then(() => {
+                        alert("文本已复制到剪贴板！");
+                    }).catch(err => {
+                        alert("复制失败，请重试！");
+                        console.error("复制到剪贴板失败: ", err);
+                    });
+                });
+            }
+        });
     </script>
 </body>
 
