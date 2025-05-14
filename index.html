@@ -490,9 +490,9 @@
             const componentWidth = component.offsetWidth;
             const componentHeight = component.offsetHeight;
     
-            // 计算位于页面底部五分之一区域的随机位置
+            // 计算位于页面底部几分之几区域的随机位置
             const x = Math.random() * (viewportWidth - componentWidth); // 横向随机位置
-            const y = viewportHeight * (4 / 6) + Math.random() * (viewportHeight * (2 / 6) - componentHeight); // 纵向限制在底部五分之一
+            const y = viewportHeight * (3 / 6) + Math.random() * (viewportHeight * (3 / 6) - componentHeight); // 纵向限制在底部五分之一
     
             return { x, y };
         }
