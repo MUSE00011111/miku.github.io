@@ -295,8 +295,20 @@
           background-color: #333;
           z-index: 10;
         }
+
+        /* 组件载入动画 */
+        @keyframes fadeInAndMove {
+          from {
+            opacity: 0;
+            transform: translateY(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
         
-        /* 随机组件的样式 */
+        /* 随机组件的样式更新 */
         #random-component {
           position: absolute;
           display: flex;
@@ -304,12 +316,14 @@
           align-items: center;
           width: 200px;
           height: 100px;
-          background: rgba(255, 255, 255, 0.4);
+          background: rgba(255, 255, 255, 0.7);
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          border-radius: 14px;
+          border-radius: 20px;
           backdrop-filter: blur(20px);
           overflow: hidden;
-          margin: 30px; /* 添加的边距 */
+          margin: 30px;
+          animation: fadeInAndMove 1s ease-out; /* 添加载入动画 */
+          transition: transform 0.2s ease; /* 鼠标靠近的 3D 效果 */
         }
         
         #random-component p {
@@ -324,6 +338,29 @@
           background: rgba(0, 0, 0, 0.1);
           border-radius: 10px;
           padding: 5px;
+        }
+        /* 鼠标靠近时的 3D 倾斜效果 */
+        #random-component:hover {
+          transform: perspective(400px) rotateX(10deg) rotateY(-10deg);
+        }
+        
+        /* 轻微随机晃动动画 */
+        @keyframes gentleShake {
+          0% {
+            transform: translate(0, 0) rotate(0deg);
+          }
+          25% {
+            transform: translate(2px, -2px) rotate(-1deg);
+          }
+          50% {
+            transform: translate(-2px, 2px) rotate(1deg);
+          }
+          75% {
+            transform: translate(2px, 2px) rotate(0deg);
+          }
+          100% {
+            transform: translate(0, 0) rotate(0deg);
+          }
         }
     </style>
 </head>
@@ -450,6 +487,7 @@
           const component = document.getElementById("random-component");
           const topBar = document.getElementById("top-bar");
         
+          // 生成随机位置（限制在页面下三分之一范围）
           function getRandomPosition() {
             const viewportWidth = window.innerWidth;
             const viewportHeight = window.innerHeight;
@@ -460,11 +498,15 @@
             const componentHeight = component.offsetHeight;
         
             const x = Math.random() * (viewportWidth - componentWidth);
-            const y = Math.random() * (viewportHeight - componentHeight - topBarHeight) + topBarHeight;
+            const y =
+              Math.random() *
+                (viewportHeight * (2 / 3) - componentHeight - topBarHeight) +
+              viewportHeight * (1 / 3);
         
             return { x, y };
           }
         
+          // 设置组件位置
           function setPosition() {
             const { x, y } = getRandomPosition();
             component.style.left = `${x}px`;
@@ -473,6 +515,33 @@
         
           // 设置初始位置
           setPosition();
+        
+          // 添加晃动动画
+          function startShakeEffect() {
+            component.style.animation = "gentleShake 3s infinite ease-in-out";
+          }
+        
+          // 鼠标靠近的 3D 效果
+          component.addEventListener("mousemove", (event) => {
+            component.style.animation = "none"; // 停止晃动
+            const rect = component.getBoundingClientRect();
+            const x = event.clientX - rect.left - rect.width / 2;
+            const y = event.clientY - rect.top - rect.height / 2;
+        
+            const rotateX = (y / rect.height) * 15; // 根据鼠标位置计算倾斜角度
+            const rotateY = -(x / rect.width) * 15;
+        
+            component.style.transform = `perspective(400px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          });
+        
+          // 鼠标移出时恢复原样
+          component.addEventListener("mouseleave", () => {
+            component.style.animation = "gentleShake 3s infinite ease-in-out"; // 恢复晃动
+            component.style.transform = "perspective(400px) rotateX(0) rotateY(0)";
+          });
+        
+          // 开始轻微晃动效果
+          startShakeEffect();
         
           // 如果窗口大小改变，重新设置位置
           window.addEventListener("resize", setPosition);
