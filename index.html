@@ -334,12 +334,15 @@
         }
         
         .icon-wrapper {
-          position: absolute;
-          bottom: 10px;
-          right: 10px;
-          background: rgba(0, 0, 0, 0.1);
-          border-radius: 10px;
-          padding: 5px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 5px;
+            cursor: pointer; /* 鼠标样式为手型 */
         }
         /* 鼠标靠近时的 3D 倾斜效果 */
         #random-component:hover {
@@ -543,19 +546,30 @@
         document.addEventListener("DOMContentLoaded", function () {
             const iconWrapper = document.querySelector(".icon-wrapper");
             const hitokoto = document.querySelector("#hitokoto");
-          // 文本复制到剪贴板
+    
             if (iconWrapper && hitokoto) {
+                iconWrapper.style.cursor = "pointer"; // 确保鼠标样式为可点击
                 iconWrapper.addEventListener("click", function () {
                     const text = hitokoto.textContent || hitokoto.innerText;
+    
+                    if (!text) {
+                        alert("=⩌⩊⩌= 无可copy内容！");
+                        return;
+                    }
+    
                     navigator.clipboard.writeText(text).then(() => {
                         alert("文本已复制到剪贴板！");
                     }).catch(err => {
-                        alert("复制失败，请重试！");
+                        alert("错误请重试！");
                         console.error("复制到剪贴板失败: ", err);
                     });
                 });
+            } else {
+                console.error("未找到 .icon-wrapper 或 #hitokoto 元素！");
             }
         });
+        console.log("iconWrapper:", iconWrapper);
+        console.log("hitokoto:", hitokoto);
     </script>
 </body>
 
