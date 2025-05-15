@@ -122,7 +122,11 @@
         /* 主内容区域 */
         .main-content {
             text-align: center;
-            padding: 150px 50px;
+            position: absolute;
+            bottom: 50px; /* 距离页面底部的距离 */
+            left: 50%;
+            transform: translate(-50%, 0); /* 水平居中 */
+            width: 100%; /* 保证内容宽度 */
         }
 
         .main-content h1 {
