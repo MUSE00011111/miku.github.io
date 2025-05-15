@@ -18,6 +18,13 @@
           background-repeat: no-repeat;
           background-position: center;
         }
+        /* 针对宽屏设备的优化 */
+        @media (min-width: 1024px) {
+            body {
+                background-size: contain; /* 宽屏设备使用等比拉伸 */
+                background-position: center center; /* 水平和垂直居中 */
+            }
+        }
         /* 引入指定字体文件，需将字体文件放在正确路径下 */
         @font-face {
             font-family: 'CustomFont';
