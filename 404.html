@@ -9,9 +9,8 @@
         /* 引入指定字体文件，需将字体文件放在正确路径下 */
         @font-face {
             font-family: 'CustomFont';
-            src: url('your_font_file.ttf');
+            src: url('//mikux.fun/assets/fonts/Chillax-Semibold.otf');
         }
-
         body {
             font-family: 'CustomFont', Arial, Helvetica, sans-serif;
             background-color: #F5F5F5;
@@ -149,38 +148,6 @@
 
         body.dark-mode .main-content button:hover {
             background-color: #EEEEEE;
-        }
-
-        /* 悬浮按钮 */
-        .floating-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #000;
-            color: #FFFFFF;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            z-index: 100;
-        }
-
-        .floating-button:hover {
-            background-color: #333;
-        }
-
-        /* 按钮图标切换动画 */
-        #dark-mode-icon,
-        #scroll-to-top-icon {
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
     </style>
 </head>
