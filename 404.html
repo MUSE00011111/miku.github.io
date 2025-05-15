@@ -25,6 +25,26 @@
                 background-position: center center; /* 水平和垂直居中 */
             }
         }
+
+        /* 默认样式（适用于手机端） */
+        h1, p, a {
+          font-size: 16px; /* 手机端默认字体大小 */
+        }
+        
+        /* 针对电脑端的样式 */
+        @media screen and (min-width: 768px) {
+          h1 {
+            font-size: 48px; /* 放大 404 的字体 */
+          }
+        
+          p {
+            font-size: 24px; /* 放大“很抱歉，您访问的页面不存在”的字体 */
+          }
+        
+          a {
+            font-size: 20px; /* 放大“返回首页”的字体 */
+          }
+        }
         /* 引入指定字体文件，需将字体文件放在正确路径下 */
         @font-face {
             font-family: 'CustomFont';
