@@ -132,6 +132,21 @@
         color: #32325d;
     }
     }
+    .left-inner {
+      position: relative; /* 新增 */
+    }
+    
+    .corner-rect {
+      position: absolute;
+      left: 16px;  /* 距离图片左边的距离，可调整 */
+      bottom: 16px; /* 距离图片底部的距离，可调整 */
+      width: 70px;   /* 矩形宽度，可调整 */
+      height: 32px;  /* 矩形高度，可调整 */
+      background: #6C63FF; /* 颜色可自定义 */
+      border-radius: 12px; /* 圆角大小 */
+      opacity: 0.9;        /* 不透明度，可选 */
+      z-index: 2;          /* 保证覆盖在图片上 */
+    }
   </style>
 </head>
 <body>
@@ -140,6 +155,7 @@
       <div class="left-inner">
         <!-- 这里替换成自己的图片链接 -->
         <img src="/assets/images/m.png" alt="图片">
+        <div class="corner-rect"></div>
       </div>
     </div>
     <div class="right">
