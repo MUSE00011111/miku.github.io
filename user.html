@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>居中界面示例</title>
+  <title>Shooting Star</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
+      background: #f5f5f5;
       min-height: 100vh;
       margin: 0;
-      background: #f0f2f5;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -15,99 +16,126 @@
     .container {
       display: flex;
       flex-direction: row;
-      justify-content: center;
-      align-items: center;
       background: #fff;
       border-radius: 24px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+      overflow: hidden;
+      max-width: 800px;
+      width: 95%;
+      min-height: 420px;
+    }
+    .left {
+      flex: 1.2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e3e9ff;
+      min-width: 0;
+    }
+    .left-inner {
+      background: #fff;
+      border-radius: 18px;
+      padding: 36px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 16px rgba(90, 110, 200, 0.10);
+    }
+    .left-inner img {
+      width: 128px;
+      height: 128px;
+      border-radius: 18px;
+      object-fit: cover;
+    }
+
+    .right {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       padding: 40px 30px;
-      min-width: 700px;
-      min-height: 400px;
+      position: relative;
     }
-    .left, .right {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .shooting-star-mobile {
+      display: none;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #6C63FF;
+      margin-bottom: 24px;
     }
-    .left-box {
-      background: #e3f0fb;
+    .form-box {
+      background: #f8f8ff;
       border-radius: 18px;
-      width: 220px;
-      height: 220px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .left-box img {
-      max-width: 160px;
-      max-height: 160px;
-      border-radius: 12px;
-    }
-    .right-box {
-      background: #f8f9fa;
-      border-radius: 18px;
-      padding: 32px 28px;
-      width: 320px;
+      padding: 36px 24px;
+      width: 100%;
+      max-width: 340px;
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      justify-content: center;
     }
-    .right-title {
-      font-size: 22px;
+    .form-title {
+      font-size: 1.3rem;
       font-weight: bold;
-      margin-bottom: 12px;
-      color: #333;
+      margin-bottom: 14px;
+      color: #32325d;
     }
-    .right-subtitle {
-      font-size: 15px;
-      color: #666;
+    .form-subtitle {
+      font-size: 1rem;
       margin-bottom: 8px;
-      margin-top: 10px;
+      color: #585878;
     }
     .input-box {
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      padding: 12px;
-      font-size: 15px;
-      outline: none;
-      margin-bottom: 4px;
       background: #fff;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.2s;
     }
-    .action-btn {
-      margin-top: 22px;
-      background: #409eff;
-      color: #fff;
+    .input-box:focus {
+      border: 1.5px solid #6C63FF;
+    }
+    .form-button {
       border: none;
       border-radius: 12px;
-      padding: 13px 0;
-      font-size: 17px;
+      background: #6C63FF;
+      color: #fff;
+      font-size: 1.1rem;
       font-weight: bold;
+      padding: 12px 0;
       cursor: pointer;
+      margin-top: 16px;
       transition: background 0.2s;
     }
-    .action-btn:hover {
-      background: #2777e6;
+    .form-button:hover {
+      background: #574fd6;
     }
-    /* 响应式：手机时隐藏左侧媒体部分，调整布局 */
+
+    /* 响应式：手机端只显示右侧，隐藏左侧 */
     @media (max-width: 768px) {
-      .left {
-        display: none !important;
-      }
       .container {
-        min-width: unset;
         flex-direction: column;
-        padding: 20px 8px;
+        box-shadow: none;
+        border-radius: 0;
+        max-width: 100vw;
+        min-height: 100vh;
       }
-    }
-    @media (min-width: 769px) {
       .left {
-        display: flex !important;
+        display: none;
       }
-      .container {
-        min-width: 700px;
-        flex-direction: row;
+      .right {
+        padding: 32px 12px 12px 12px;
+        min-height: 100vh;
+      }
+      .shooting-star-mobile {
+        display: block;
+      }
+      .form-box {
+        padding: 28px 6px;
+        max-width: 100vw;
       }
     }
   </style>
@@ -115,18 +143,20 @@
 <body>
   <div class="container">
     <div class="left">
-      <div class="left-box">
+      <div class="left-inner">
+        <!-- 这里替换成自己的图片链接 -->
         <img src="/assets/images/m.png" alt="图片">
       </div>
     </div>
     <div class="right">
-      <form class="right-box">
-        <div class="right-title">主标题</div>
-        <div class="right-subtitle">小标题1</div>
-        <input class="input-box" type="text" placeholder="请输入内容1">
-        <div class="right-subtitle">小标题2</div>
-        <input class="input-box" type="password" placeholder="请输入内容2">
-        <button type="submit" class="action-btn">SHOOTING STAR</button>
+      <div class="shooting-star-mobile">SHOOTING STAR</div>
+      <form class="form-box">
+        <div class="form-title">主标题</div>
+        <div class="form-subtitle">小标题 1</div>
+        <input type="text" class="input-box" placeholder="请输入内容1">
+        <div class="form-subtitle">小标题 2</div>
+        <input type="text" class="input-box" placeholder="请输入内容2">
+        <button class="form-button" type="submit">按钮文字</button>
       </form>
     </div>
   </div>
