@@ -1,220 +1,134 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>社交网站登录</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: #f0f2f5;
-        }
-
-        .login-container {
-            display: flex;
-            width: 100%;
-            max-width: 800px;
-            height: 500px;
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            margin: 2rem;
-        }
-
-        /* 左侧媒体区域 */
-        .media-side {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .media-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* 视频样式 */
-        .login-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* 隐藏视频默认控件 */
-            -webkit-user-modify: none;
-            pointer-events: none;
-        }
-
-        /* 图片样式 */
-        .login-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* 圆角遮罩 */
-        .media-mask {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: inherit; /* 继承父级背景色 */
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* 初始直角 */
-            /* 移动端适配时使用圆角 */
-            @media (min-width: 768px) {
-                clip-path: polygon(0 0, calc(100% - 40px) 0, 100% 100%, calc(0 + 40px) 100%);
-            }
-        }
-
-        /* 右侧表单区域 */
-        .form-side {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 3rem 4rem;
-            background: white;
-        }
-
-        .form-container {
-            width: 100%;
-            max-width: 350px;
-        }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .logo img {
-            width: 180px;
-        }
-
-        /* 表单样式（复用原有样式，仅调整间距） */
-        .form-group {
-            margin-bottom: 1.8rem;
-        }
-
-        .form-group input {
-            padding: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .login-btn {
-            padding: 1.2rem;
-            font-size: 1.1rem;
-        }
-
-        /* 手机端适配 */
-        @media (max-width: 768px) {
-            .login-container {
-                flex-direction: column;
-                height: auto;
-                max-width: 90%;
-                border-radius: 12px;
-            }
-
-            .media-side {
-                height: 250px; /* 固定视频/图片高度 */
-            }
-
-            .form-side {
-                padding: 2.5rem 2rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>登录</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f6fa;
+    }
+    .global-alert {
+      display: none;
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ff5252;
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      font-size: 16px;
+      z-index: 9999;
+      min-width: 200px;
+      text-align: center;
+    }
+    .login-container {
+      width: 400px;
+      margin: 80px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 48px 40px 36px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .login-title {
+      text-align: left;
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 32px;
+      color: #222;
+      letter-spacing: 1px;
+    }
+    .form-label {
+      font-size: 17px;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    .input-rounded {
+      width: 100%;
+      padding: 12px 16px;
+      margin-bottom: 24px;
+      border: 1px solid #ddd;
+      border-radius: 22px;
+      font-size: 17px;
+      transition: border 0.2s;
+    }
+    .input-rounded:focus {
+      border: 1.5px solid #1976d2;
+      outline: none;
+      background: #f0f8ff;
+    }
+    .login-btn {
+      width: 100%;
+      padding: 14px 0;
+      background: #1976d2;
+      color: #fff;
+      font-size: 19px;
+      border: none;
+      border-radius: 22px;
+      cursor: pointer;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-top: 12px;
+      transition: background .2s;
+    }
+    .login-btn:hover {
+      background: #135aa1;
+    }
+  </style>
 </head>
 <body>
-    <div class="login-container">
-        <!-- 左侧媒体区域 -->
-        <div class="media-side">
-            <div class="media-container">
-                <!-- 优先加载视频，无视频则显示图片 -->
-                <video class="login-video" autoplay loop muted plays-inline>
-                    <source src="video-path.mp4" type="video/mp4"> <!-- 替换为你的视频地址 -->
-                    <!-- 视频加载失败时显示图片 -->
-                    <img class="login-image" src="image-path.jpg" alt="登录背景" /> <!-- 替换为你的图片地址 -->
-                </video>
-            </div>
-            <!-- 圆角遮罩层 -->
-            <div class="media-mask"></div>
-        </div>
+  <div id="global-alert" class="global-alert"></div>
+  <div class="login-container">
+    <div class="login-title">登录</div>
+    <form id="login-form" autocomplete="off">
+      <label class="form-label" for="user">邮箱/手机号</label>
+      <input type="text" class="input-rounded" id="user" name="user" placeholder="请输入邮箱或手机号" autocomplete="username" />
 
-        <!-- 右侧表单区域 -->
-        <div class="form-side">
-            <div class="form-container">
-                <div class="logo">
-                    <img src="https://example.com/logo.png" alt="社交网站logo"> <!-- 替换为你的logo地址 -->
-                </div>
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="email">邮箱/手机号</label>
-                        <input type="text" id="email" name="email" required>
-                        <div class="error-message" id="emailError">请输入正确的邮箱或手机号</div>
-                    </div>
+      <label class="form-label" for="password">密码</label>
+      <input type="password" class="input-rounded" id="password" name="password" placeholder="请输入密码" autocomplete="current-password" />
 
-                    <div class="form-group">
-                        <label for="password">密码</label>
-                        <input type="password" id="password" name="password" required minlength="6">
-                        <div class="error-message" id="passwordError">密码至少6位</div>
-                    </div>
+      <button type="submit" class="login-btn">登录</button>
+    </form>
+  </div>
+  <script>
+    function showAlert(msg) {
+      const alertBox = document.getElementById('global-alert');
+      alertBox.textContent = msg;
+      alertBox.style.display = 'block';
+      setTimeout(() => {
+        alertBox.style.display = 'none';
+      }, 2500);
+    }
 
-                    <button type="button" class="login-btn" onclick="handleLogin()">登录</button>
-                </form>
+    function isEmail(str) {
+      return /^[\w\.-]+@[\w\.-]+\.\w+$/.test(str);
+    }
 
-                <div class="register-link">
-                    还没有账号？<a href="#">立即注册</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    function isPhone(str) {
+      return /^1[3-9]\d{9}$/.test(str);
+    }
 
-    <script>
-        // 视频加载失败时自动显示图片（可选增强）
-        const video = document.querySelector('.login-video');
-        video.addEventListener('error', () => {
-            video.style.display = 'none';
-            const img = video.querySelector('img');
-            if (img) img.style.display = 'block';
-        });
-
-        function handleLogin() {
-            // 保持原有验证逻辑不变
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const emailError = document.getElementById('emailError');
-            const passwordError = document.getElementById('passwordError');
-            let isValid = true;
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email) && !/^1[3-9]\d{9}$/.test(email)) {
-                emailError.style.display = 'block';
-                isValid = false;
-            } else {
-                emailError.style.display = 'none';
-            }
-
-            if (password.length < 6) {
-                passwordError.style.display = 'block';
-                isValid = false;
-            } else {
-                passwordError.style.display = 'none';
-            }
-
-            if (isValid) {
-                console.log('登录请求参数：', { email, password });
-                alert('登录功能正在开发中...');
-            }
-        }
-    </script>
-</head>
+    document.getElementById('login-form').onsubmit = function (e) {
+      e.preventDefault();
+      const user = document.getElementById('user').value.trim();
+      const pwd = document.getElementById('password').value;
+      if (!(isEmail(user) || isPhone(user))) {
+        showAlert('请输入正确的邮箱或手机号');
+        return;
+      }
+      if (pwd.length < 6) {
+        showAlert('密码长度不能少于6位');
+        return;
+      }
+      // 成功逻辑
+      showAlert('登录成功！（提示示例）');
+    };
+  </script>
+</body>
 </html>
