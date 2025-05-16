@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHOOTING STAR | 账号</title>
+    <title>社交网站登录</title>
     <style>
         * {
             margin: 0;
@@ -21,12 +21,73 @@
         }
 
         .login-container {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 2rem;
+            display: flex;
             width: 100%;
-            max-width: 400px;
+            max-width: 800px;
+            height: 500px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            margin: 2rem;
+        }
+
+        /* 左侧媒体区域 */
+        .media-side {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .media-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 视频样式 */
+        .login-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* 隐藏视频默认控件 */
+            -webkit-user-modify: none;
+            pointer-events: none;
+        }
+
+        /* 图片样式 */
+        .login-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 圆角遮罩 */
+        .media-mask {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: inherit; /* 继承父级背景色 */
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* 初始直角 */
+            /* 移动端适配时使用圆角 */
+            @media (min-width: 768px) {
+                clip-path: polygon(0 0, calc(100% - 40px) 0, 100% 100%, calc(0 + 40px) 100%);
+            }
+        }
+
+        /* 右侧表单区域 */
+        .form-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 4rem;
+            background: white;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 350px;
         }
 
         .logo {
@@ -35,127 +96,113 @@
         }
 
         .logo img {
-            width: 150px;
+            width: 180px;
         }
 
+        /* 表单样式（复用原有样式，仅调整间距） */
         .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #333;
-            font-weight: 500;
+            margin-bottom: 1.8rem;
         }
 
         .form-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-            outline: none;
-        }
-
-        .form-group input:focus {
-            border-color: #1a73e8;
-            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+            padding: 1rem;
+            font-size: 1.1rem;
         }
 
         .login-btn {
-            width: 100%;
-            padding: 1rem;
-            background: #1a73e8;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .login-btn:hover {
-            background: #1556b0;
-        }
-
-        .register-link {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: #5f6368;
-        }
-
-        .register-link a {
-            color: #1a73e8;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .error-message {
-            color: #dc3545;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            display: none;
+            padding: 1.2rem;
+            font-size: 1.1rem;
         }
 
         /* 手机端适配 */
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             .login-container {
-                padding: 1.5rem;
+                flex-direction: column;
+                height: auto;
                 max-width: 90%;
+                border-radius: 12px;
             }
 
-            .logo img {
-                width: 120px;
+            .media-side {
+                height: 250px; /* 固定视频/图片高度 */
+            }
+
+            .form-side {
+                padding: 2.5rem 2rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="login-container">
-        <div class="logo">
-            <img src="https://example.com/logo.png" alt="社交网站logo"> <!-- 替换为你的logo地址 -->
+        <!-- 左侧媒体区域 -->
+        <div class="media-side">
+            <div class="media-container">
+                <!-- 优先加载视频，无视频则显示图片 -->
+                <video class="login-video" autoplay loop muted plays-inline>
+                    <source src="video-path.mp4" type="video/mp4"> <!-- 替换为你的视频地址 -->
+                    <!-- 视频加载失败时显示图片 -->
+                    <img class="login-image" src="image-path.jpg" alt="登录背景" /> <!-- 替换为你的图片地址 -->
+                </video>
+            </div>
+            <!-- 圆角遮罩层 -->
+            <div class="media-mask"></div>
         </div>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="email">邮箱/手机号</label>
-                <input type="text" id="email" name="email" required>
-                <div class="error-message" id="emailError">请输入正确的邮箱或手机号</div>
+
+        <!-- 右侧表单区域 -->
+        <div class="form-side">
+            <div class="form-container">
+                <div class="logo">
+                    <img src="https://example.com/logo.png" alt="社交网站logo"> <!-- 替换为你的logo地址 -->
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">邮箱/手机号</label>
+                        <input type="text" id="email" name="email" required>
+                        <div class="error-message" id="emailError">请输入正确的邮箱或手机号</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" id="password" name="password" required minlength="6">
+                        <div class="error-message" id="passwordError">密码至少6位</div>
+                    </div>
+
+                    <button type="button" class="login-btn" onclick="handleLogin()">登录</button>
+                </form>
+
+                <div class="register-link">
+                    还没有账号？<a href="#">立即注册</a>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="password">密码</label>
-                <input type="password" id="password" name="password" required minlength="6">
-                <div class="error-message" id="passwordError">密码至少6位</div>
-            </div>
-
-            <button type="button" class="login-btn" onclick="handleLogin()">登录</button>
-        </form>
-
-        <div class="register-link">
-            还没有账号？<a href="#">立即注册</a>
         </div>
     </div>
 
     <script>
+        // 视频加载失败时自动显示图片（可选增强）
+        const video = document.querySelector('.login-video');
+        video.addEventListener('error', () => {
+            video.style.display = 'none';
+            const img = video.querySelector('img');
+            if (img) img.style.display = 'block';
+        });
+
         function handleLogin() {
+            // 保持原有验证逻辑不变
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const emailError = document.getElementById('emailError');
             const passwordError = document.getElementById('passwordError');
             let isValid = true;
 
-            // 简单邮箱格式验证（可根据需求增强）
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email) && !/^1[3-9]\d{9}$/.test(email)) { // 同时验证手机号格式
+            if (!emailRegex.test(email) && !/^1[3-9]\d{9}$/.test(email)) {
                 emailError.style.display = 'block';
                 isValid = false;
             } else {
                 emailError.style.display = 'none';
             }
 
-            // 密码长度验证
             if (password.length < 6) {
                 passwordError.style.display = 'block';
                 isValid = false;
@@ -164,11 +211,10 @@
             }
 
             if (isValid) {
-                // 这里替换为实际的登录接口请求（如fetch或axios）
                 console.log('登录请求参数：', { email, password });
-                alert('登录功能正在开发中...'); // 实际开发中删除
+                alert('登录功能正在开发中...');
             }
         }
     </script>
-</body>
+</head>
 </html>
