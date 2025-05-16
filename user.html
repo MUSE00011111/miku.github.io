@@ -1,6 +1,6 @@
 <html lang="zh-CN"><head>
   <meta charset="UTF-8">
-  <title>Shooting Star</title>
+  <title>SHOOTING STAR | 账号</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -10,7 +10,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    }
+  }
     .container {
       display: flex;
       background: #fff;
@@ -19,50 +19,56 @@
       overflow: hidden;
       width: 585px;
       height: 330px;
-    }
+  }
     .left {
       display: flex;
-    }
+  }
     .left-inner {
       background: #fff;
       display: flex;
       padding: 44px 8px;
       align-items: center;
       box-shadow: 0 2px 16px rgba(90, 110, 200, 0.10);
-    }
+  }
     .left-inner img {
       width: 292px;
       height: 314px;
       border-radius: 15px;
       object-fit: cover;
-    }
-
+  }
+    .right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 53px 14px;
+      position: relative;
+  }
+    .shooting-star-mobile {
+      display: none;
+      font-size: 20px;
+      font-weight: bold;
+      color: #6C63FF;
+      margin-bottom: 24px;
+  }
     .form-box {
-      background: #f8f8ff;
       border-radius: 15px;
       padding: 13px 7px;
       display: flex;
       flex-direction: column;
       align-items: stretch;
-    }
-    .shooting-star-mobile {
-      display: none;
-      font-size: 2rem;
-      font-weight: bold;
-      color: #6C63FF;
-      margin-bottom: 24px;
-    }
+  }
     .form-title {
       font-size: 21px;
       font-weight: bold;
       margin-bottom: 27px;
       color: #32325d;
-    }
+  }
     .form-subtitle {
       font-size: 11px;
       margin-bottom: 4px;
       color: #585878;
-    }
+  }
     .input-box {
       background: #fff;
       border-radius: 9px;
@@ -72,10 +78,10 @@
       font-size: 15px;
       outline: none;
       transition: border 0.2s;
-    }
+  }
     .input-box:focus {
       border: 1.5px solid #6C63FF;
-    }
+  }
     .form-button {
       border: none;
       border-radius: 12px;
@@ -87,10 +93,10 @@
       cursor: pointer;
       margin-top: 12px;
       transition: background 0.2s;
-    }
+  }
     .form-button:hover {
       background: #574fd6;
-    }
+  }
 
     /* 响应式：手机端只显示右侧，隐藏左侧 */
     @media (max-width: 768px) {
@@ -100,25 +106,33 @@
         border-radius: 0;
         max-width: 100vw;
         min-height: 100vh;
-      }
+    }
       .left {
-        display: flex;
-      }
+        display: none;
+    }
       .right {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 53px 14px;
-        position: relative;
-      }
-        .shooting-star-mobile {
-          display: none;
-          font-size: 2rem;
-          font-weight: bold;
-          color: #6C63FF;
-          margin-bottom: 24px;
-      }
+        padding: 32px 12px 12px 12px;
+        min-height: 100vh;
+    }
+      .shooting-star-mobile {
+        display: none;
+        font-size: 20px;
+        font-weight: bold;
+        color: #6C63FF;
+        margin-bottom: 24px;
+    }
+      .form-box {
+        /* padding: 28px 6px; */
+        max-width: 100vw;
+    }
+      .form-title {
+        display: none;
+        font-size: 21px;
+        font-weight: bold;
+        margin-bottom: 27px;
+        color: #32325d;
+    }
+    }
   </style>
 </head>
 <body>
@@ -132,12 +146,12 @@
     <div class="right">
       <div class="shooting-star-mobile">SHOOTING STAR</div>
       <form class="form-box">
-        <div class="form-title">主标题</div>
-        <div class="form-subtitle">小标题 1</div>
-        <input type="text" class="input-box" placeholder="请输入内容1">
-        <div class="form-subtitle">小标题 2</div>
-        <input type="text" class="input-box" placeholder="请输入内容2">
-        <button class="form-button" type="submit">按钮文字</button>
+        <div class="form-title">登录</div>
+        <div class="form-subtitle">手机号</div>
+        <input type="text" class="input-box" placeholder="">
+        <div class="form-subtitle">密码</div>
+        <input type="text" class="input-box" placeholder="">
+        <button class="form-button" type="submit">立即开始</button>
       </form>
     </div>
   </div>
