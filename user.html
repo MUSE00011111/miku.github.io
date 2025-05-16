@@ -1,97 +1,114 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>登录页面</title>
+  <title>居中界面示例</title>
   <style>
     body {
-      background: #f5f6fa;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       margin: 0;
+      background: #f0f2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .container {
       display: flex;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      overflow: hidden;
-      min-width: 600px;
-      max-width: 900px;
-    }
-    .login-card {
-      padding: 40px 32px;
-      flex: 1 1 320px;
-      display: flex;
-      flex-direction: column;
+      flex-direction: row;
       justify-content: center;
-      background: #f9fafb;
+      align-items: center;
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 40px 30px;
+      min-width: 700px;
+      min-height: 400px;
     }
-    .login-card h2 {
-      margin-bottom: 24px;
-      font-size: 28px;
-      color: #333;
-    }
-    .login-card form {
-      display: flex;
-      flex-direction: column;
-    }
-    .login-card input {
-      margin-bottom: 16px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 16px;
-    }
-    .login-card button {
-      padding: 12px;
-      background: #4f8fff;
-      color: #fff;
-      font-size: 18px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .login-card button:hover {
-      background: #3777e4;
-    }
-    .media-content {
-      flex: 1 1 320px;
-      background: #e9eef7;
+    .left, .right {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-width: 300px;
     }
-    .media-content img,
-    .media-content video {
-      max-width: 100%;
-      max-height: 360px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    .left-box {
+      background: #e3f0fb;
+      border-radius: 18px;
+      width: 220px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .left-box img {
+      max-width: 160px;
+      max-height: 160px;
+      border-radius: 12px;
+    }
+    .right-box {
+      background: #f8f9fa;
+      border-radius: 18px;
+      padding: 32px 28px;
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
+    }
+    .right-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #333;
+    }
+    .right-subtitle {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 8px;
+      margin-top: 10px;
+    }
+    .input-box {
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      padding: 12px;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 4px;
+      background: #fff;
+    }
+    .action-btn {
+      margin-top: 22px;
+      background: #409eff;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 13px 0;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .action-btn:hover {
+      background: #2777e6;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="login-card">
-      <h2>登录账户</h2>
-      <form>
-        <input type="text" placeholder="用户名/邮箱" required>
-        <input type="password" placeholder="密码" required>
-        <button type="submit">登录</button>
-      </form>
+    <div class="left">
+      <div class="left-box">
+        <img src="/assets/images/m.png" alt="图片">
+        <!-- 替换上面 src 为你的图片地址 -->
+      </div>
     </div>
-    <div class="media-content">
-      <!-- 这里可以放图片或视频 -->
-      <img src="//mikux.fun/assets/images/m.png" alt="媒体内容">
-      <!-- 或者放视频
-      <video src="your-video.mp4" controls></video>
-      -->
+    <div class="right">
+      <form class="right-box">
+        <div class="right-title">主标题</div>
+        <div class="right-subtitle">小标题1</div>
+        <input class="input-box" type="text" placeholder="请输入内容1">
+        <div class="right-subtitle">小标题2</div>
+        <input class="input-box" type="password" placeholder="请输入内容2">
+        <button type="submit" class="action-btn">按钮文字</button>
+      </form>
     </div>
   </div>
 </body>
