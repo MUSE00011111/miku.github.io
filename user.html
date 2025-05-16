@@ -15,14 +15,12 @@
     }
     .container {
       display: flex;
-      flex-direction: row;
       background: #fff;
       border-radius: 24px;
       box-shadow: 0 4px 32px rgba(0,0,0,0.10);
       overflow: hidden;
-      max-width: 800px;
-      width: 95%;
-      min-height: 420px;
+      max-width: 585px;
+      min-height: 330px;
     }
     .left {
       flex: 1.2;
@@ -75,23 +73,23 @@
       align-items: stretch;
     }
     .form-title {
-      font-size: 1.3rem;
+      font-size: 21px;
       font-weight: bold;
-      margin-bottom: 14px;
+      margin-bottom: 27px;
       color: #32325d;
     }
     .form-subtitle {
-      font-size: 1rem;
-      margin-bottom: 8px;
+      font-size: 11px;
+      margin-bottom: 4px;
       color: #585878;
     }
     .input-box {
       background: #fff;
-      border-radius: 12px;
-      border: 1px solid #ddd;
+      border-radius: 9px;
+      border: 2px solid #ddd;
       padding: 12px 14px;
-      margin-bottom: 18px;
-      font-size: 1rem;
+      margin-bottom: 8px;
+      font-size: 15px;
       outline: none;
       transition: border 0.2s;
     }
@@ -107,7 +105,7 @@
       font-weight: bold;
       padding: 12px 0;
       cursor: pointer;
-      margin-top: 16px;
+      margin-top: 12px;
       transition: background 0.2s;
     }
     .form-button:hover {
@@ -124,19 +122,30 @@
         min-height: 100vh;
       }
       .left {
-        display: none;
+        display: flex;
       }
       .right {
-        padding: 32px 12px 12px 12px;
-        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 53px 14px;
+        position: relative;
       }
-      .shooting-star-mobile {
-        display: block;
+        .shooting-star-mobile {
+          display: none;
+          font-size: 2rem;
+          font-weight: bold;
+          color: #6C63FF;
+          margin-bottom: 24px;
       }
       .form-box {
-        padding: 28px 6px;
-        max-width: 100vw;
-      }
+        background: #f8f8ff;
+        border-radius: 15px;
+        padding: 13px 7px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
     }
   </style>
 </head>
