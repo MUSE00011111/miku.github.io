@@ -412,7 +412,6 @@
       </div>
     </div>    
     <script>
-        let setPosition; // 让 setPosition 全局可用
         // 从 API 获取一言
         fetch('https://v1.hitokoto.cn/?c=b')
             .then(response => response.json())
@@ -424,11 +423,6 @@
                 const hitokotoWidth = hitokotoElement.offsetWidth;
                 const randomComponentElement = document.getElementById('random-component');
                 randomComponentElement.style.width = (hitokotoWidth + 70) + 'px';
-            })
-            // 刷新卡片位置
-            if (typeof setPosition === "function") {
-                setPosition();
-                }
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -493,13 +487,17 @@
         function getRandomPosition() {
             const viewportWidth = window.innerWidth;
             const viewportHeight = window.innerHeight;
+    
             const componentWidth = component.offsetWidth;
             const componentHeight = component.offsetHeight;
+    
             // 计算位于页面底部几分之几区域的随机位置
             const x = Math.random() * (viewportWidth - componentWidth); // 横向随机位置
             const y = viewportHeight * (3 / 6) + Math.random() * (viewportHeight * (3 / 6) - componentHeight); // 纵向限制在底部五分之一
+    
             return { x, y };
         }
+        
           // 设置组件位置
           function setPosition() {
             const { x, y } = getRandomPosition();
