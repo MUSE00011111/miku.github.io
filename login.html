@@ -1,1 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录与注册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f2f5;
+        }
+
+       .login-container {
+            display: flex;
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            margin: 2rem;
+        }
+
+        /* 左侧媒体区域 */
+       .media-side {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+       .media-inner {
+            width: calc(100% - 40px); /* 距离卡片边框20px边距 */
+            height: calc(100% - 40px);
+            border-radius: 10px; /* 内部圆角矩形 */
+            overflow: hidden;
+        }
+
+        /* 图片样式（根据报错信息调整路径，保留原始URL） */
+       .login-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block; /* 确保图片显示 */
+        }
+
+        /* 视频样式（默认隐藏，有视频时通过JS显示） */
+       .login-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            -webkit-user-modify: none;
+            pointer-events: none;
+            display: none;
+        }
+
+        /* 右侧表单区域 */
+       .form-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem; /* 表单距离卡片边框边距 */
+            background: white;
+            position: relative;
+        }
+
+       .form-container {
+            width: 100%;
+            max-width: 350px;
+            transition: transform 0.5s ease; /* 切换动画 */
+        }
+
+       .form-container.register {
+            transform: translateX(100%); /* 注册表单向右偏移 */
+        }
+
+       .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+       .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+       .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+       .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+       .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #5f6368;
+        }
+
+       .register-link a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        /* 手机端适配 */
+        @media (max-width: 768px) {
+           .login-container {
+                flex-direction: column;
+                height: auto;
+            }
+           .media-side {
+                height: 250px;
+                padding: 15px;
+            }
+           .form-side {
+                padding: 1.5rem;
+            }
+           .form-container.register {
+                transform: translateY(50px); /* 移动端垂直切换动画 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- 左侧媒体区域（含边距和圆角矩形） -->
+        <div class="media-side">
+            <div class="media-inner">
+                <!-- 图片控件（根据需求保留，视频存在时通过JS隐藏） -->
+                <img class="login-image" src="http://localhost:8080/l/aicy.png" alt="登录背景">
+                <!-- 视频控件（默认隐藏，需手动替换URL） -->
+                <video class="login-video" autoplay loop muted plays-inline>
+                    <source src="your-video-path.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <!-- 右侧表单区域（登录/注册切换） -->
+        <div class="form-side">
+            <div class="form-container" id="formContainer">
+                <!-- 登录表单 -->
+                <form id="loginForm">
+                    <h2>登录</h2>
+                    <div class="form-group">
+                        <label for="email">邮箱/手机号</label>
+                        <input type="text" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" id="password" name="password" required minlength="6">
+                    </div>
+                    <button type="button" class="login-btn" onclick="handleLogin()">登录</button>
+                </form>
+
+                <!-- 注册表单 -->
+                <form id="registerForm" style="position: absolute; width: 100%;">
+                    <h2>注册</h2>
+                    <div class="form-group">
+                        <label for="regEmail">邮箱/手机号</label>
+                        <input type="text" id="regEmail" name="regEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword">密码</label>
+                        <input type="password" id="regPassword" name="regPassword" required minlength="6">
+                    </div>
+                    <button type="button" class="login-btn" onclick="handleRegister()">注册</button>
+                </form>
+
+                <!-- 切换链接 -->
+                <div class="register-link" onclick="toggleForm()">
+                    <span id="formSwitch">还没有账号？</span> <a href="#">立即注册</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 自动判断是否显示视频（需服务端支持视频路径）
+        const video = document.querySelector('.login-video');
+        if (video.canPlayType('video/mp4')) {
+            video.style.display = 'block';
+            document.querySelector('.login-image').style.display = 'none';
+        }
+
+        // 表单切换动画
+        function toggleForm() {
+            const formContainer = document.getElementById('formContainer');
+            const formSwitch = document.getElementById('formSwitch');
+            formContainer.classList.toggle('register');
+            
+            if (formContainer.classList.contains('register')) {
+                formSwitch.textContent = "已有账号？";
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('registerForm').style.display = 'block';
+            } else {
+                formSwitch.textContent = "还没有账号？";
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('registerForm').style.display = 'none';
+            }
+        }
+
+        // 模拟后端请求（需替换为真实接口）
+        function handleLogin() {
+            alert('登录功能已连接后端');
+        }
+
+        function handleRegister() {
+            alert('注册功能已连接后端');
+        }
+    </script>
+</body>
+</html>
 
