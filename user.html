@@ -24,6 +24,11 @@
       min-width: 700px;
       min-height: 400px;
     }
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+    }
     .left, .right {
       flex: 1;
       display: flex;
@@ -93,7 +98,7 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container sidebar">
     <div class="left">
       <div class="left-box">
         <img src="/assets/images/m.png" alt="图片">
