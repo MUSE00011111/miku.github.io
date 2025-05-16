@@ -90,6 +90,26 @@
     .action-btn:hover {
       background: #2777e6;
     }
+    /* 响应式：手机时隐藏左侧媒体部分，调整布局 */
+    @media (max-width: 768px) {
+      .left {
+        display: none !important;
+      }
+      .container {
+        min-width: unset;
+        flex-direction: column;
+        padding: 20px 8px;
+      }
+    }
+    @media (min-width: 769px) {
+      .left {
+        display: flex !important;
+      }
+      .container {
+        min-width: 700px;
+        flex-direction: row;
+      }
+    }
   </style>
 </head>
 <body>
@@ -97,7 +117,6 @@
     <div class="left">
       <div class="left-box">
         <img src="/assets/images/m.png" alt="图片">
-        <!-- 替换上面 src 为你的图片地址 -->
       </div>
     </div>
     <div class="right">
@@ -107,7 +126,7 @@
         <input class="input-box" type="text" placeholder="请输入内容1">
         <div class="right-subtitle">小标题2</div>
         <input class="input-box" type="password" placeholder="请输入内容2">
-        <button type="submit" class="action-btn">按钮文字</button>
+        <button type="submit" class="action-btn">SHOOTING STAR</button>
       </form>
     </div>
   </div>
