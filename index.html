@@ -374,23 +374,26 @@
           align-items: center;
         }
         .modal-backdrop {
-          position: absolute;
-          left: 0; top: 0; right: 0; bottom: 0;
-          background: rgba(0,0,0,0.3);
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            /* background: rgba(0,0,0,0.3); */
+            /* backdrop-filter: blur(20px); */
         }
         .modal-content {
-          position: relative;
-          /*background: #fff; 注释掉container中background: rgba(0,0,0,0.3)改为白，默认白*/
-          border-radius: 18px;
-          box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-          /*padding: 0;*/
-          /*width: 420px;*/
-          max-width: 582px;
-          /*height: 600px;*/
-          /*max-height: 90vh;*/
-          display: flex;
-          flex-direction: column;
-          overflow: hidden;
+            position: relative;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            /* padding: 0; */
+            /* width: 420px; */
+            max-width: 582px;
+            /* height: 600px; */
+            /* max-height: 90vh; */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
         .modal-content iframe {
           border: none;
@@ -431,8 +434,13 @@
             width: 585px;
             height: 330px;
       }
-        .left {
-          display: flex;
+        .left-inner {
+            /* background: #fff; */
+            display: flex;
+            padding: 44px 8px;
+            align-items: center;
+            /* box-shadow: 0 2px 16px rgba(90, 110, 200, 0.10); */
+        }
       }
         .left-inner {
           /*background: #fff;*/
@@ -483,14 +491,14 @@
           color: #585878;
       }
         .input-box {
-          background: #fff;
-          border-radius: 9px;
-          border: 2px solid #ddd;
-          padding: 12px 14px;
-          margin-bottom: 8px;
-          font-size: 15px;
-          outline: none;
-      }
+            background: rgba(255,255,255,0.2);
+            border-radius: 9px;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            font-size: 15px;
+            outline: none;
+        }
         .input-box:focus {
           border: 1.5px solid #6C63FF;
       }
