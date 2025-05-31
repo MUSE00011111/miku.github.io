@@ -7,13 +7,11 @@
     <link rel="icon" type="image/x-icon" href="//aicy.mikux.fun/asset/pictures/miku-love-douyin.png">
     <title>SHOOTING STAR</title>
     <style>
-        /* 去除默认的 body 边距 */
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
         }
 
-        /* 顶部导航栏 */
         nav {
             display: flex;
             justify-content: space-between;
@@ -26,109 +24,84 @@
             -webkit-backdrop-filter: blur(20px);
             z-index: 100;
         }
-        
         @font-face {
             font-family: 'Chillax';
             src: url('//mikux.fun/assets/fonts/Chillax-Semibold.otf') format('opentype');
             font-weight: 600;
             font-style: normal;
         }
-
         .nav-logo {
             display: flex;
             align-items: center;
             font-size: 20px;
             font-weight: bold;
-            font-family: 'Chillax', sans-serif; /* Apply the custom font */
+            font-family: 'Chillax', sans-serif;
         }
-        /* 新的汉堡菜单样式 */
         .hamburger {
             cursor: pointer;
             display: none;
         }
-
         .hamburger input {
             display: none;
         }
-
         .hamburger svg {
-            /* 调小汉堡按钮尺寸 */
             height: 2em;
-            /* Define the transition for transforming the SVG */
             transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         .line {
             fill: none;
             stroke: #333;
             stroke-linecap: round;
             stroke-linejoin: round;
             stroke-width: 3;
-            /* Define the transition for transforming the Stroke */
             transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
                         stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         .line-top-bottom {
             stroke-dasharray: 12 63;
         }
-
         .hamburger input:checked + svg {
             transform: rotate(-45deg);
         }
-
         .hamburger input:checked + svg .line-top-bottom {
             stroke-dasharray: 20 300;
             stroke-dashoffset: -32.42;
         }
-
         .nav-links {
             display: flex;
             align-items: center;
         }
-
-        /* 功能、定价、关于按钮集合 */
         .nav-links-left {
             display: flex;
             align-items: center;
             gap: 18px;
         }
-
-        /* 登录与立即开始按钮集合 */
         .nav-links-right {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-
-        /* 两个集合之间的间隙 */
         .nav-links-left + .nav-links-right {
             margin-left: 24px;
         }
-
         .nav-links a {
             text-decoration: none;
             color: #333333;
         }
-
         .nav-links button {
             padding: 10px 20px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
         }
-
         .btn-login {
             background-color: #F5F5F5;
             color: #000;
         }
-
         .btn-get-started {
             background-color: #000;
             color: #FFFFFF;
         }
-
-        /* 全屏视频背景 */
         video {
             position: fixed;
             top: 0;
@@ -140,61 +113,55 @@
             pointer-events: none;
         }
 
-        /* 手机端样式 */
+        /* 手机端全屏菜单 */
         @media (max-width: 768px) {
             nav {
-                flex-direction: row; /* 修改为水平布局 */
-                justify-content: space-between; /* 两端对齐 */
+                flex-direction: row;
+                justify-content: space-between;
                 align-items: center;
                 padding: 10px;
             }
-
             .hamburger {
                 display: block;
+                z-index: 10001;
             }
-
             .nav-links {
                 display: none;
                 flex-direction: column;
-                align-items: flex-start;
-                width: 100%;
-                position: absolute;
-                top: 100%;
+                align-items: center;
+                justify-content: center;
+                width: 100vw;
+                height: 100vh;
+                position: fixed;
+                top: 0;
                 left: 0;
-                background-color: rgba(224, 224, 224, 0.8);
+                background-color: rgba(224, 224, 224, 0.97);
                 backdrop-filter: blur(10px);
                 -webkit-backdrop-filter: blur(10px);
                 animation-duration: 0.3s;
                 animation-fill-mode: forwards;
                 filter: blur(5px);
                 opacity: 0;
+                z-index: 10000;
             }
-
             .nav-links.active {
                 display: flex;
                 animation-name: fadeInBlur;
+                opacity: 1;
+                filter: blur(0px);
             }
-
             .nav-links.closing {
                 animation-name: fadeOutBlur;
+                opacity: 0;
+                filter: blur(5px);
             }
-
-            .nav-links-left {
+            .nav-links-left, .nav-links-right {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                padding: 10px;
-                /* 调整行距为 1.5 倍 */
-                line-height: 1.5;
+                align-items: center;
+                gap: 24px;
+                padding: 0;
+                width: 100%;
             }
-
-            .nav-links-right {
-                margin-top: 0;
-                padding: 10px;
-                /* 调整行距为 1.5 倍 */
-                line-height: 1.5;
-            }
-
             .nav-links-left + .nav-links-right {
                 margin-left: 0;
             }
@@ -205,59 +172,25 @@
         .nav-links button:active {
             transform: scale(0.95);
         }
-
-        /* 字体样式 */
         body {
             font-size: 16px;
         }
-
-        h1,
-        h2,
-        h3 {
-            font-weight: bold;
-        }
-
-        h1 {
-            font-size: 28px;
-        }
-
-        h2 {
-            font-size: 24px;
-        }
-
-        h3 {
-            font-size: 20px;
-        }
-
-        /* 动画定义 */
+        h1, h2, h3 { font-weight: bold; }
+        h1 { font-size: 28px; }
+        h2 { font-size: 24px; }
+        h3 { font-size: 20px; }
         @keyframes fadeInBlur {
-            from {
-                opacity: 0;
-                filter: blur(5px);
-            }
-            to {
-                opacity: 1;
-                filter: blur(0px);
-            }
+            from { opacity: 0; filter: blur(5px);}
+            to { opacity: 1; filter: blur(0px);}
         }
-
         @keyframes fadeOutBlur {
-            from {
-                opacity: 1;
-                filter: blur(0px);
-            }
-            to {
-                opacity: 0;
-                filter: blur(5px);
-            }
+            from { opacity: 1; filter: blur(0px);}
+            to { opacity: 0; filter: blur(5px);}
         }
-        /* 定价按钮的父级容器样式 */
         .dropdown {
             position: relative;
             display: inline-block;
         }
-        
-        /* 隐藏的二级菜单 */
         .dropdown-menu {
             display: none;
             position: absolute;
@@ -268,8 +201,6 @@
             border-radius: 4px;
             min-width: 120px;
         }
-        
-        /* 二级菜单中的链接样式 */
         .dropdown-menu a {
             display: block;
             padding: 8px 16px;
@@ -277,63 +208,46 @@
             color: #333333;
             white-space: nowrap;
         }
-        
         .dropdown-menu a:hover {
             background-color: #f5f5f5;
         }
-        
-        /* 当鼠标悬停时显示二级菜单 */
         .dropdown:hover .dropdown-menu {
             display: block;
         }
-        /* 顶栏的样式示例 */
         #top-bar {
           position: fixed;
           top: 0;
           left: 0;
           width: 100%;
-          height: 60px; /* 示例高度，可根据实际调整 */
+          height: 60px;
           background-color: #333;
           z-index: 10;
         }
-
-        /* 组件载入动画 */
         @keyframes fadeInAndMove {
-          from {
-            opacity: 0;
-            transform: translateY(50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(50px);}
+          to { opacity: 1; transform: translateY(0);}
         }
-        
-        /* 随机组件的样式更新 */
         #random-component {
           position: absolute;
           display: flex;
           justify-content: center;
           align-items: center;
           width: 350px;
-          max-width: 90%; /* 防止宽度超出视口 */
-          white-space: nowrap; /* 防止文本换行 */
+          max-width: 90%;
+          white-space: nowrap;
           height: 100px;
           background: rgba(255, 255, 255, 0.4);
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
           border-radius: 20px;
           backdrop-filter: blur(20px);
           overflow: hidden;
-         /*margin: 30px;*/
-          animation: fadeInAndMove 1s ease-out; /* 添加载入动画 */
-          transition: transform 0.2s ease; /* 鼠标靠近的 3D 效果 */
+          animation: fadeInAndMove 1s ease-out;
+          transition: transform 0.2s ease;
         }
-        
         #random-component p {
           margin: 0;
           text-align: center;
         }
-        
         .icon-wrapper {
           position: absolute;
           bottom: 10px;
@@ -342,34 +256,18 @@
           border-radius: 10px;
           padding: 5px;
         }
-        /* 鼠标靠近时的 3D 倾斜效果 */
         #random-component:hover {
           transform: perspective(400px) rotateX(10deg) rotateY(-10deg);
         }
-        
-        /* 轻微随机晃动动画 */
         @keyframes gentleShake {
-          0% {
-            transform: translate(0, 0) rotate(0deg);
-          }
-          25% {
-            transform: translate(2px, -2px) rotate(-1deg);
-          }
-          50% {
-            transform: translate(-2px, 2px) rotate(1deg);
-          }
-          75% {
-            transform: translate(2px, 2px) rotate(0deg);
-          }
-          100% {
-            transform: translate(0, 0) rotate(0deg);
-          }
+          0% { transform: translate(0, 0) rotate(0deg);}
+          25% { transform: translate(2px, -2px) rotate(-1deg);}
+          50% { transform: translate(-2px, 2px) rotate(1deg);}
+          75% { transform: translate(2px, 2px) rotate(0deg);}
+          100% { transform: translate(0, 0) rotate(0deg);}
         }
-        
-        /* 弹窗css */
         #login-modal {
           position: fixed;
-          /*z-index: 9999;*/
           left: 0; top: 0; right: 0; bottom: 0;
           display: flex;
           justify-content: center;
@@ -377,22 +275,14 @@
         }
         .modal-backdrop {
             position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            /* background: rgba(0,0,0,0.3); */
+            left: 0; top: 0; right: 0; bottom: 0;
             backdrop-filter: blur(20px); 
         }
         .modal-content {
             position: relative;
             border-radius: 18px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-            /* padding: 0; */
-            /* width: 420px; */
             max-width: 582px;
-            /* height: 600px; */
-            /* max-height: 90vh; */
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -415,43 +305,27 @@
           color: #888;
           transition: color 0.2s;
         }
-        .modal-close:hover {
-          color: #f44;
-        }
-        /*body {
-          background: #f5f5f5;
-          min-height: 100vh;
-          margin: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-      }*/
+        .modal-close:hover { color: #f44;}
         .container {
             display: flex;
             background: rgba(255,255,255,0.4);
             backdrop-filter: blur(20px);
-            /* border-radius: 24px; */
             box-shadow: 0 4px 32px rgba(0,0,0,0.10);
             overflow: hidden;
             width: 585px;
             height: 330px;
         }
-        .left {
-            display: flex;
-        }
+        .left { display: flex;}
         .left-inner {
-            /* background: #fff; */
             display: flex;
             padding: 44px 8px;
             align-items: center;
-            /* box-shadow: 0 2px 16px rgba(90, 110, 200, 0.10); */
         }
         .left-inner img {
             width: 292px;
             height: 314px;
             border-radius: 12px;
             object-fit: cover;
-            /* background: rgba(0,0,0,0); */
             backdrop-filter: blur(20px);
         }
         .right {
@@ -461,32 +335,32 @@
           align-items: center;
           padding: 53px 14px;
           position: relative;
-      }
+        }
         .shooting-star-mobile {
           display: none;
           font-size: 20px;
           font-weight: bold;
           color: #6C63FF;
           margin-bottom: 24px;
-      }
+        }
         .form-box {
           border-radius: 15px;
           padding: 13px 7px;
           display: flex;
           flex-direction: column;
           align-items: stretch;
-      }
+        }
         .form-title {
           font-size: 21px;
           font-weight: bold;
           margin-bottom: 27px;
           color: #32325d;
-      }
+        }
         .form-subtitle {
           font-size: 11px;
           margin-bottom: 4px;
           color: #585878;
-      }
+        }
         .input-box {
             background: rgba(255,255,255,0.2);
             border-radius: 9px;
@@ -498,7 +372,7 @@
         }
         .input-box:focus {
           border: 1.5px solid #6C63FF;
-      }
+        }
         .form-button {
           border: none;
           border-radius: 12px;
@@ -510,20 +384,13 @@
           cursor: pointer;
           margin-top: 12px;
           transition: background 0.2s;
-      }
-        .form-button:hover {
-          background: #574fd6;
-      }
-    
-        /* 响应式：手机端只显示 */
+        }
+        .form-button:hover { background: #574fd6;}
         @media (max-width: 768px) {
         #login-modal {
             position: fixed;
             z-index: 9999; 
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
+            left: 0; top: 0; right: 0; bottom: 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -532,11 +399,7 @@
                 position: relative;
                 border-radius: 18px; 
                 box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-                /* padding: 0; */
-                /* width: 420px; */
                 max-width: 582px;
-                /* height: 600px; */
-                /* max-height: 90vh; */
                 display: flex;
                 flex-direction: column;
                 overflow: hidden;
@@ -548,9 +411,7 @@
             max-width: 100vw;
             min-height: 100vh;
         }
-          .left {
-            display: none;
-        }
+          .left { display: none;}
           .right {
             padding: 32px 12px 12px 12px;
             min-height: 100vh;
@@ -562,32 +423,20 @@
             color: #6C63FF;
             margin-bottom: 24px;
         }
-          .form-box {
-            /* padding: 28px 6px; */
-            max-width: 100vw;
+          .form-box { max-width: 100vw;}
+          .form-title { display: none;}
         }
-          .form-title {
-            display: none;
-            font-size: 21px;
-            font-weight: bold;
-            margin-bottom: 27px;
-            color: #32325d;
-        }
-        }
-        .left-inner {
-          position: relative; /* 新增 */
-        }
-        
+        .left-inner { position: relative; }
         .corner-rect {
           position: absolute;
-          left: 16px;  /* 距离图片左边的距离，可调整 */
-          bottom: 16px; /* 距离图片底部的距离，可调整 */
-          width: 70px;   /* 矩形宽度，可调整 */
-          height: 32px;  /* 矩形高度，可调整 */
-          background: #6C63FF; /* 颜色可自定义 */
-          border-radius: 12px; /* 圆角大小 */
-          opacity: 0.9;        /* 不透明度，可选 */
-          z-index: 2;          /* 保证覆盖在图片上 */
+          left: 16px;
+          bottom: 16px;
+          width: 70px;
+          height: 32px;
+          background: #6C63FF;
+          border-radius: 12px;
+          opacity: 0.9;
+          z-index: 2;
         }
     </style>
 </head>
@@ -632,11 +481,11 @@
       <div class="background">
         <p id="hitokoto">加载中</p>
         <div class="icon-wrapper">
-         <svg width="16" height="16" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 12.4316V7.8125C13 6.2592 14.2592 5 15.8125 5H40.1875C41.7408 5 43 6.2592 43 7.8125V32.1875C43 33.7408 41.7408 35 40.1875 35H35.5163" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M32.1875 13H7.8125C6.2592 13 5 14.2592 5 15.8125V40.1875C5 41.7408 6.2592 43 7.8125 43H32.1875C33.7408 43 35 41.7408 35 40.1875V15.8125C35 14.2592 33.7408 13 32.1875 13Z" fill="#333" stroke="#333" stroke-width="4" stroke-linejoin="round"></path></svg>
+         <svg width="16" height="16" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 12.4316V7.8125C13 6.2592 14.2592 5 15.8125 5H40.1875C41.7408 5 43 6.2592 43 7.8125V40.1875C43 41.7408 41.7408 43 40.1875 43H15.8125C14.2592 43 13 41.7408 13 40.1875V35.5684"></path>
+         </svg>
         </div>
       </div>
     </div>
-    <!-- 登录弹窗（初始为隐藏） -->
     <div id="login-modal" style="display: none;">
       <div class="modal-backdrop"></div>
       <div class="modal-content">
@@ -644,12 +493,7 @@
           <div class="container">
             <div class="left">
               <div class="left-inner">
-                <!-- 这里替换成自己的图片链接 -->
                 <img src="/assets/images/m.png" alt="图片">
-                <!--<div class="corner-rect">
-                  <img src="/assets/images/acg_icon.png" alt="acg图标" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;">
-                  <span style="color:#fff;font-size:15px;vertical-align:middle;">注册</span>
-                </div> -->
               </div>
             </div>
             <div class="right">
@@ -667,14 +511,12 @@
       </div>
     </div>
     <script>
-        // 从 API 获取一言
+        // 一言
         fetch('https://v1.hitokoto.cn/?c=b')
             .then(response => response.json())
             .then(data => {
                 const hitokotoElement = document.getElementById('hitokoto');
-                hitokotoElement.textContent = data.hitokoto; // 加载内容
-        
-                // 在内容加载完成后，动态更新宽度
+                hitokotoElement.textContent = data.hitokoto;
                 const hitokotoWidth = hitokotoElement.offsetWidth;
                 const randomComponentElement = document.getElementById('random-component');
                 randomComponentElement.style.width = (hitokotoWidth + 70) + 'px';
@@ -682,11 +524,10 @@
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-        
+
         function toggleNavLinks() {
             const navLinks = document.querySelector('.nav-links');
             const isActive = navLinks.classList.contains('active');
-
             if (isActive) {
                 navLinks.classList.remove('active');
                 navLinks.classList.add('closing');
@@ -699,113 +540,88 @@
                 navLinks.classList.add('active');
             }
         }
-        // 定义一个视频文件数组
+
+        // 菜单项点击自动关闭菜单（移动端全屏菜单）
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll('.nav-links a, .nav-links button').forEach(item => {
+                item.addEventListener('click', () => {
+                    const navLinks = document.querySelector('.nav-links');
+                    const hamburgerInput = document.querySelector('.hamburger input');
+                    if (window.innerWidth <= 768 && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        navLinks.classList.add('closing');
+                        setTimeout(() => {
+                            navLinks.classList.remove('closing');
+                            navLinks.style.display = 'none';
+                        }, 300);
+                        hamburgerInput.checked = false; // 关闭汉堡按钮
+                    }
+                });
+            });
+        });
+
+        // 随机视频
         const videos = [
             "//mikux.fun/furina.mp4",
             "//mikux.fun/miku-x.mp4",
             "//mikux.fun/chill.mp4",
             "//mikux.fun/ATL-01.mp4"
         ];
-
-        // 随机选择一个视频
         const randomIndex = Math.floor(Math.random() * videos.length);
         const selectedVideo = videos[randomIndex];
-    
-        // 设置视频源
         const videoElement = document.getElementById('background-video');
         const sourceElement = document.createElement('source');
         sourceElement.src = selectedVideo;
         sourceElement.type = 'video/mp4';
         videoElement.appendChild(sourceElement);
 
-        function toggleNavLinks() {
-            const navLinks = document.querySelector('.nav-links');
-            const isActive = navLinks.classList.contains('active');
-    
-            if (isActive) {
-                navLinks.classList.remove('active');
-                navLinks.classList.add('closing');
-                setTimeout(() => {
-                    navLinks.classList.remove('closing');
-                    navLinks.style.display = 'none';
-                }, 300);
-            } else {
-                navLinks.style.display = 'flex';
-                navLinks.classList.add('active');
-            }
-        }
+        // 随机组件动画
         document.addEventListener("DOMContentLoaded", () => {
           const component = document.getElementById("random-component");
-          const topBar = document.getElementById("top-bar");
-        
-        // 生成随机位置（限制在页面底部五分之一范围）
-        function getRandomPosition() {
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-    
-            const componentWidth = component.offsetWidth;
-            const componentHeight = component.offsetHeight;
-    
-            // 计算位于页面底部几分之几区域的随机位置
-            const x = Math.random() * (viewportWidth - componentWidth); // 横向随机位置
-            const y = viewportHeight * (3 / 6) + Math.random() * (viewportHeight * (3 / 6) - componentHeight); // 纵向限制在底部五分之一
-    
-            return { x, y };
-        }
-        
-          // 设置组件位置
+          function getRandomPosition() {
+              const viewportWidth = window.innerWidth;
+              const viewportHeight = window.innerHeight;
+              const componentWidth = component.offsetWidth;
+              const componentHeight = component.offsetHeight;
+              const x = Math.random() * (viewportWidth - componentWidth);
+              const y = viewportHeight * (3 / 6) + Math.random() * (viewportHeight * (3 / 6) - componentHeight);
+              return { x, y };
+          }
           function setPosition() {
             const { x, y } = getRandomPosition();
             component.style.left = `${x}px`;
             component.style.top = `${y}px`;
           }
-        
-          // 设置初始位置
           setPosition();
-        
-          // 添加晃动动画
           function startShakeEffect() {
             component.style.animation = "gentleShake 3s infinite ease-in-out";
           }
-        
-          // 鼠标靠近的 3D 效果
           component.addEventListener("mousemove", (event) => {
-            component.style.animation = "none"; // 停止晃动
+            component.style.animation = "none";
             const rect = component.getBoundingClientRect();
             const x = event.clientX - rect.left - rect.width / 2;
             const y = event.clientY - rect.top - rect.height / 2;
-        
-            const rotateX = (y / rect.height) * 15; // 根据鼠标位置计算倾斜角度
+            const rotateX = (y / rect.height) * 15;
             const rotateY = -(x / rect.width) * 15;
-        
             component.style.transform = `perspective(400px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
           });
-        
-          // 鼠标移出时恢复原样
           component.addEventListener("mouseleave", () => {
-            component.style.animation = "gentleShake 3s infinite ease-in-out"; // 恢复晃动
+            component.style.animation = "gentleShake 3s infinite ease-in-out";
             component.style.transform = "perspective(400px) rotateX(0) rotateY(0)";
           });
-        
-          // 开始轻微晃动效果
           startShakeEffect();
-        
-          // 如果窗口大小改变，重新设置位置
           window.addEventListener("resize", setPosition);
         });
-        // 打开弹窗
+
+        // 登录弹窗
         document.querySelector('.btn-login').addEventListener('click', function () {
           document.getElementById('login-modal').style.display = 'flex';
-          document.body.style.overflow = 'hidden'; // 禁止背景滚动
+          document.body.style.overflow = 'hidden';
         });
-        
-        // 关闭弹窗函数
         function closeLoginModal() {
           document.getElementById('login-modal').style.display = 'none';
-          document.body.style.overflow = ''; // 恢复滚动
+          document.body.style.overflow = '';
         }
-        
-        // 点击遮罩关闭弹窗
         document.addEventListener('click', function (e) {
           const modal = document.getElementById('login-modal');
           if (modal.style.display !== 'flex') return;
@@ -815,5 +631,4 @@
         });
     </script>
 </body>
-
-</html>    
+</html>
